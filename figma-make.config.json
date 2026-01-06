@@ -1,0 +1,22 @@
+{
+  "deployment": {
+    "supabase": {
+      "enabled": false,
+      "reason": "This application uses localStorage for data persistence. No backend required."
+    },
+    "platforms": {
+      "github-pages": true,
+      "azure-static-web-apps": true
+    }
+  },
+  "build": {
+    "command": "npm run build",
+    "outputDir": "dist",
+    "baseUrl": "/"
+  },
+  "app": {
+    "type": "frontend-only",
+    "framework": "react",
+    "storage": "localStorage"
+  }
+}

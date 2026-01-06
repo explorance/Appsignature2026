@@ -1,317 +1,322 @@
-# 🤝 Guide de Contribution
+# Contributing to Email Signature Generator
 
-Merci de contribuer au projet Email Signature Generator d'eXplorance!
+Thank you for your interest in contributing! This document provides guidelines for contributing to the Email Signature Generator project.
 
-## 📋 Prérequis
+## 🚀 Getting Started
 
-- Node.js 18.x ou 20.x
-- pnpm 8.x
+### Prerequisites
+- Node.js 20.x or higher
+- npm 10.x or higher
 - Git
-- Un éditeur de code (VS Code recommandé)
+- A code editor (VS Code recommended)
 
-## 🚀 Setup Développement
+### Setup Development Environment
 
-### 1. Fork et Clone
+1. **Fork the repository**
+   ```bash
+   # Click "Fork" on GitHub
+   ```
+
+2. **Clone your fork**
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/email-signature-generator.git
+   cd email-signature-generator
+   ```
+
+3. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+4. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open in browser**
+   ```
+   http://localhost:5173
+   ```
+
+## 📝 Development Workflow
+
+### Create a Feature Branch
 
 ```bash
-# Cloner le repository
-git clone <repository-url>
-cd email-signature-generator
-
-# Installer pnpm si nécessaire
-npm install -g pnpm@8
-
-# Installer les dépendances
-pnpm install
+git checkout -b feature/your-feature-name
+# or
+git checkout -b bugfix/issue-description
 ```
 
-### 2. Configuration VS Code
+Branch naming conventions:
+- `feature/` - New features
+- `bugfix/` - Bug fixes
+- `docs/` - Documentation updates
+- `refactor/` - Code refactoring
+- `perf/` - Performance improvements
 
-Si vous utilisez VS Code, les extensions recommandées seront suggérées automatiquement :
-- ESLint
-- Prettier
-- Tailwind CSS IntelliSense
-- ES7+ React/Redux/React-Native snippets
-- TypeScript Nightly
+### Make Your Changes
 
-### 3. Démarrer le serveur de développement
+1. Write clean, readable code
+2. Follow existing code style
+3. Add comments for complex logic
+4. Update documentation if needed
+5. Test your changes thoroughly
+
+### Commit Your Changes
 
 ```bash
-pnpm run dev
+git add .
+git commit -m "feat: add new feature description"
 ```
 
-L'application sera disponible sur `http://localhost:5173`
+Commit message format:
+- `feat:` - New feature
+- `fix:` - Bug fix
+- `docs:` - Documentation
+- `style:` - Formatting
+- `refactor:` - Code restructuring
+- `test:` - Adding tests
+- `chore:` - Maintenance
 
-## 🏗️ Architecture du Projet
+### Push and Create Pull Request
 
-### Structure des Dossiers
+```bash
+git push origin feature/your-feature-name
+```
 
+Then create a PR on GitHub.
+
+## 🧪 Testing
+
+### Manual Testing Checklist
+
+- [ ] Test in Chrome
+- [ ] Test in Firefox
+- [ ] Test in Safari (if available)
+- [ ] Test on mobile device
+- [ ] Test copy to clipboard
+- [ ] Test HTML download
+- [ ] Test admin panel access
+- [ ] Test settings persistence
+- [ ] Check console for errors
+- [ ] Verify responsive design
+
+### Build Testing
+
+```bash
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## 🎨 Code Style Guidelines
+
+### TypeScript
+- Use TypeScript for all new code
+- Define interfaces for all data structures
+- Avoid `any` type - use proper types
+- Use meaningful variable names
+
+### React
+- Use functional components with hooks
+- Keep components small and focused
+- Extract reusable logic into custom hooks
+- Use proper prop types
+
+### CSS/Tailwind
+- Use Tailwind utility classes
+- Follow spacing scale (4px, 8px, etc.)
+- Keep custom CSS to minimum
+- Use design tokens from theme.css
+
+### File Organization
 ```
 src/
 ├── app/
-│   ├── components/        # Composants React
-│   │   ├── Dialog.tsx           # Dialogs modernes
-│   │   ├── Toast.tsx            # Notifications
-│   │   ├── SignatureGenerator.tsx
-│   │   └── AdminPanel.tsx
-│   ├── utils/            # Utilitaires
-│   │   └── dataManager.ts      # Gestion localStorage
-│   ├── types.ts          # Types TypeScript centralisés
-│   └── App.tsx           # Composant racine
-├── imports/              # Assets Figma
-├── styles/               # Styles globaux
-└── main.tsx             # Point d'entrée
+│   ├── components/     # React components
+│   ├── utils/          # Utility functions
+│   └── types.ts        # Type definitions
+└── styles/             # Global styles
 ```
 
-### Principes de Base
+## 📚 Documentation
 
-1. **TypeScript First** - Tout le code doit être typé
-2. **Composants Fonctionnels** - Utiliser hooks React
-3. **Tailwind CSS** - Utiliser les classes Tailwind v4
-4. **localStorage** - Persistance côté client uniquement
-5. **Validation** - Valider toutes les entrées utilisateur
+### Update Documentation When:
+- Adding new features
+- Changing existing behavior
+- Modifying configuration
+- Updating dependencies
+- Fixing bugs
 
-## 📝 Standards de Code
+### Documentation Files
+- `README.md` - Main documentation
+- `DEPLOYMENT_GUIDE.md` - Deployment instructions
+- `QUICKSTART.md` - Quick start guide
+- `CHANGELOG.md` - Version history
+- Code comments - Inline documentation
 
-### TypeScript
+## 🐛 Reporting Bugs
 
-```typescript
-// ✅ Bon - Types explicites
-interface UserData {
-  name: string;
-  email: string;
-}
+### Before Reporting
+1. Check existing issues
+2. Verify it's reproducible
+3. Check console for errors
+4. Test in multiple browsers
 
-function updateUser(data: UserData): void {
-  // ...
-}
+### Bug Report Should Include
+- Clear description
+- Steps to reproduce
+- Expected behavior
+- Actual behavior
+- Screenshots (if applicable)
+- Browser/OS information
+- Console errors
 
-// ❌ Éviter - any types
-function updateUser(data: any) {
-  // ...
-}
+Use the [Bug Report Template](.github/ISSUE_TEMPLATE/bug_report.md)
+
+## 💡 Suggesting Features
+
+### Before Suggesting
+1. Check existing feature requests
+2. Consider if it aligns with project goals
+3. Think about implementation complexity
+
+### Feature Request Should Include
+- Clear description
+- Use case/problem it solves
+- Proposed solution
+- Benefits
+- Priority level
+
+Use the [Feature Request Template](.github/ISSUE_TEMPLATE/feature_request.md)
+
+## 🔍 Code Review Process
+
+### What We Look For
+- Code quality and readability
+- Proper error handling
+- Performance considerations
+- Accessibility compliance
+- Security best practices
+- Documentation updates
+- Test coverage
+
+### Review Timeline
+- Initial review: Within 3 business days
+- Follow-up: Within 1-2 business days
+- Merge: After approval from maintainers
+
+## ✅ Pull Request Checklist
+
+Before submitting:
+- [ ] Code follows style guidelines
+- [ ] Self-reviewed the code
+- [ ] Added/updated comments
+- [ ] Updated documentation
+- [ ] Tested locally
+- [ ] No console errors/warnings
+- [ ] Build succeeds
+- [ ] Responsive on mobile
+- [ ] Accessible (keyboard navigation, screen readers)
+
+## 🏗️ Project Structure
+
+```
+email-signature-generator/
+├── .github/                # GitHub configs
+│   ├── workflows/          # CI/CD workflows
+│   └── ISSUE_TEMPLATE/     # Issue templates
+├── public/                 # Static assets
+├── src/
+│   ├── app/
+│   │   ├── components/     # React components
+│   │   │   ├── ui/         # Reusable UI components
+│   │   │   ├── AdminPanel.tsx
+│   │   │   └── SignatureGenerator.tsx
+│   │   ├── utils/          # Utility functions
+│   │   ├── types.ts        # TypeScript types
+│   │   └── App.tsx         # Main component
+│   ├── styles/             # Global styles
+│   └── main.tsx            # Entry point
+├── index.html              # HTML template
+├── package.json            # Dependencies
+├── vite.config.ts          # Vite config
+├── tsconfig.json           # TypeScript config
+└── README.md               # Documentation
 ```
 
-### Composants React
+## 🚫 What NOT to Do
 
-```tsx
-// ✅ Bon - Composant fonctionnel avec props typées
-interface ButtonProps {
-  label: string;
-  onClick: () => void;
-  disabled?: boolean;
-}
+- Don't commit `node_modules/`
+- Don't commit `.env` files
+- Don't include sensitive data
+- Don't make unrelated changes in one PR
+- Don't submit untested code
+- Don't ignore TypeScript errors
+- Don't remove existing functionality without discussion
 
-export default function Button({ label, onClick, disabled = false }: ButtonProps) {
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className="px-4 py-2 bg-blue-600 text-white rounded-lg"
-    >
-      {label}
-    </button>
-  );
-}
-```
+## 🎯 Contribution Areas
 
-### Tailwind CSS
+### High Priority
+- Bug fixes
+- Performance improvements
+- Accessibility enhancements
+- Documentation improvements
+- Test coverage
 
-```tsx
-// ✅ Bon - Classes Tailwind inline
-<div className="flex items-center gap-4 p-6 bg-white rounded-lg shadow-sm">
-  {/* ... */}
-</div>
+### Medium Priority
+- New features (discussed first)
+- UI/UX improvements
+- Code refactoring
+- Browser compatibility
 
-// ❌ Éviter - Styles inline
-<div style={{ display: 'flex', padding: '24px' }}>
-  {/* ... */}
-</div>
-```
+### Low Priority
+- Minor style tweaks
+- Code formatting
+- Dependency updates
 
-### Gestion d'État
+## 🤝 Community Guidelines
 
-```tsx
-// ✅ Bon - useState avec type explicite
-const [count, setCount] = useState<number>(0);
-const [user, setUser] = useState<UserData | null>(null);
+### Be Respectful
+- Treat everyone with respect
+- Welcome newcomers
+- Be patient with questions
+- Provide constructive feedback
 
-// ✅ Bon - useEffect avec dépendances
-useEffect(() => {
-  loadData();
-}, [dependency]);
-```
+### Be Professional
+- Use clear, professional language
+- Stay on topic
+- Avoid personal attacks
+- Respect differing opinions
 
-## 🔄 Workflow Git
+### Be Collaborative
+- Share knowledge
+- Help others
+- Give credit where due
+- Work together toward common goals
 
-### Branches
+## 📞 Getting Help
 
-- `main` - Branch principale (production)
-- `develop` - Branch de développement
-- `feature/*` - Nouvelles fonctionnalités
-- `fix/*` - Corrections de bugs
-- `hotfix/*` - Corrections urgentes
+### Resources
+- [README](./README.md) - Project overview
+- [Quickstart Guide](./QUICKSTART.md) - Getting started
+- [Deployment Guide](./DEPLOYMENT_GUIDE.md) - Deployment help
+- [GitHub Issues](https://github.com/YOUR-REPO/issues) - Ask questions
 
-### Commits
+### Contact
+- Create an issue for bugs/features
+- Use discussions for general questions
+- Email: support@explorance.com
 
-Suivre la convention Conventional Commits :
+## 📄 License
 
-```bash
-# Features
-git commit -m "feat: add banner link functionality"
-
-# Bug fixes
-git commit -m "fix: resolve localStorage validation issue"
-
-# Documentation
-git commit -m "docs: update deployment guide"
-
-# Refactoring
-git commit -m "refactor: improve dataManager error handling"
-
-# Styling
-git commit -m "style: adjust dialog component spacing"
-
-# Tests
-git commit -m "test: add validation tests"
-```
-
-### Pull Requests
-
-1. Créer une branche depuis `develop`
-2. Faire vos modifications
-3. Tester localement (`pnpm run build`)
-4. Pousser votre branche
-5. Créer une Pull Request vers `develop`
-6. Attendre la review et le merge
-
-## 🧪 Tests
-
-### Avant de Soumettre
-
-```bash
-# Vérifier les types
-pnpm run type-check
-
-# Build l'application
-pnpm run build
-
-# Tester le build
-pnpm run preview
-```
-
-### Checklist de Test Manuel
-
-- [ ] L'application démarre sans erreurs
-- [ ] Le formulaire fonctionne correctement
-- [ ] Les données sont sauvegardées dans localStorage
-- [ ] Le panneau admin fonctionne (mot de passe: `eXplorance`)
-- [ ] La copie vers le presse-papiers fonctionne
-- [ ] Le téléchargement HTML fonctionne
-- [ ] Les toasts s'affichent correctement
-- [ ] Les dialogs s'ouvrent et se ferment
-- [ ] L'application est responsive
-
-## 📦 Ajout de Dépendances
-
-```bash
-# Toujours utiliser pnpm
-pnpm add <package-name>
-
-# Pour les dépendances de développement
-pnpm add -D <package-name>
-```
-
-⚠️ **Important** : Documenter pourquoi vous ajoutez une dépendance dans votre PR.
-
-## 🎨 Design System
-
-### Couleurs Principales
-
-```css
-/* Bleu principal */
-bg-blue-600 (#0050c1)
-hover:bg-blue-700
-
-/* Gris */
-bg-gray-50
-bg-gray-100
-border-gray-200
-text-gray-500
-text-gray-900
-
-/* États */
-bg-green-50 (success)
-bg-red-50 (error)
-bg-yellow-50 (warning)
-```
-
-### Espacement
-
-```css
-gap-2    /* 8px */
-gap-3    /* 12px */
-gap-4    /* 16px */
-p-4      /* 16px */
-p-6      /* 24px */
-```
-
-### Arrondis
-
-```css
-rounded-lg     /* 8px - Cartes */
-rounded-xl     /* 12px - Dialogs */
-rounded-2xl    /* 16px - Panneaux */
-rounded-[36px] /* Boutons */
-```
-
-## 🐛 Debugging
-
-### Console Logs
-
-```typescript
-// ✅ Bon - Logs informatifs
-console.log("Loading settings:", settings);
-console.error("Failed to save:", error);
-
-// ❌ Éviter - Logs en production
-console.log("test"); // À supprimer avant commit
-```
-
-### DevTools
-
-1. **React DevTools** - Inspecter les composants
-2. **Console** - Vérifier les erreurs
-3. **Application → Local Storage** - Vérifier les données
-4. **Network** - Vérifier les requêtes (si applicable)
-
-## 📚 Ressources
-
-- [React Documentation](https://react.dev)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-- [Tailwind CSS v4 Docs](https://tailwindcss.com)
-- [Vite Documentation](https://vitejs.dev)
-- [Lucide Icons](https://lucide.dev)
-
-## ❓ Besoin d'Aide?
-
-- Ouvrir une issue sur GitHub
-- Contacter l'équipe de développement
-- Consulter la documentation existante
-
-## ✅ Checklist PR
-
-Avant de soumettre une Pull Request :
-
-- [ ] Le code compile sans erreurs (`pnpm run build`)
-- [ ] Les types TypeScript sont corrects (`pnpm run type-check`)
-- [ ] Le code suit les standards du projet
-- [ ] Les nouveaux composants sont documentés
-- [ ] Les tests manuels sont passés
-- [ ] Les commits suivent la convention
-- [ ] La PR a une description claire
-- [ ] Les screenshots sont ajoutés (si changements UI)
+By contributing, you agree that your contributions will be licensed under the MIT License.
 
 ---
 
-**Merci de contribuer! 🎉**
+**Thank you for contributing!** 🎉
+
+Every contribution, no matter how small, helps make this project better for everyone.

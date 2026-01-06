@@ -21,7 +21,6 @@ jobs:
         with:
           submodules: true
           lfs: false
-          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
