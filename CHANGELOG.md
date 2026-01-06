@@ -1,104 +1,117 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to the Email Signature Generator project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.0.0] - 2026-01-06
 
-### Added
-- Initial release of Email Signature Generator
-- User interface for generating email signatures
-- Live preview of signatures
-- Copy to clipboard functionality
-- Download as HTML functionality
-- Admin panel with password protection
-- Office location management
-- Banner category management with event organization
-- Multi-language disclaimer support (English, French, Both)
-- Form field customization
-- Company logo URL configuration
-- LocalStorage persistence
-- Responsive design for all devices
-- GitHub Pages deployment workflow
-- Comprehensive documentation
+### ✨ Added
 
-### Features
-- **Signature Generator**
-  - Real-time preview
-  - Form validation
-  - Auto-save to localStorage
-  - Export options (Copy/Download)
-  - Banner selection by category
-  - Disclaimer language options
+#### Core Features
+- 📧 **Email Signature Generator** - Interactive form with real-time preview
+- 🏢 **Office Selection** - Dropdown with configurable office locations
+- 🎨 **Event Banners** - Banner selection organized by event categories
+- 🌐 **Multi-language Disclaimers** - Support for French, English, or both
+- 📋 **Copy to Clipboard** - One-click copy functionality
+- 💾 **Download HTML** - Export signature as HTML file
+- 🔗 **Clickable Links** - Logo and banner links
 
-- **Admin Panel**
-  - Password protection (default: eXplorance)
-  - Office management (add/edit/delete)
-  - Banner categories with event names
-  - Banner management per category
-  - Form field visibility controls
-  - Company branding settings
-  - Disclaimer text editing (EN/FR)
+#### Admin Panel
+- 🔒 **Password Protection** - Secure admin access (password: `eXplorance`)
+- 🏢 **Office Management** - Add, edit, delete office locations
+- 🎨 **Banner Categories** - Organize banners by events
+- 📋 **Field Configuration** - Control field visibility and requirements
+- ⚙️ **Default Values** - Configure company logo, website, and disclaimers
+- 🔗 **Banner Links** - Optional clickable links for banners with badge indicator
 
-### Technical
-- React 18.3.1
+#### Data Management
+- 💾 **localStorage Integration** - Client-side data persistence
+- 🔄 **Automatic Backup** - Backup before every save
+- ✅ **Data Validation** - Comprehensive validation before save
+- 🔐 **Auto-restore** - Restore from backup on errors
+- 📤 **Export/Import** - JSON backup functionality
+
+#### UI Components
+- 🎨 **Modern Dialog** - Figma-designed confirmation dialogs
+- 🔔 **Toast Notifications** - Success/Error/Warning toasts
+- 🎭 **Smooth Animations** - fadeIn, slideUp, slideIn animations
+- 📱 **Responsive Design** - Mobile and desktop support
+
+#### Development
+- ⚙️ **GitHub Actions Workflows** - CI/CD automation
+- 🚀 **GitHub Pages Deployment** - Automated deployment workflow
+- ☁️ **Azure Static Web Apps** - Azure deployment configuration
+- 🧪 **CI Pipeline** - Build and test automation
+- 📦 **pnpm Package Manager** - Fast, efficient dependency management
+
+### 🛠️ Technical Stack
+- React 18.3
 - TypeScript
 - Vite 6.3.5
-- Tailwind CSS 4.1.12
-- Radix UI components
-- Lucide React icons
-- LocalStorage API
-- GitHub Actions deployment
+- Tailwind CSS v4
+- Lucide React Icons
+- localStorage API
 
-### Design
-- Arial font family throughout
-- Precise spacing (4px, 8px intervals)
-- Color scheme: #0077b5 (links), #666666 (disclaimer)
-- Logo height: 36.5px
-- Responsive breakpoints
-- Accessible components
+### 📦 Infrastructure
+- GitHub Actions for CI/CD
+- GitHub Pages ready
+- Azure Static Web Apps ready
+- Custom domain support
 
-### Migration
-- Removed Supabase backend dependency
-- Converted to pure frontend application
-- Implemented localStorage persistence
-- Simplified deployment process
-- Enhanced privacy (no data transmission)
+### 🔒 Security
+- Client-side only (no backend)
+- Password-protected admin panel
+- Data stored locally in browser
+- No external data transmission
+
+---
 
 ## [Unreleased]
 
-### Planned
-- Social media icon integration
-- Custom color themes
-- Signature templates
-- PWA support
-- Import/export settings
-- Additional language support
-- Analytics dashboard
+### 🎯 Planned Features
+- [ ] Multiple signature templates
+- [ ] Dark mode support
+- [ ] Export to multiple formats (TXT, RTF)
+- [ ] Signature history
+- [ ] CSV import for bulk data
+- [ ] Email client preview modes
+- [ ] User authentication (optional)
+- [ ] Cloud sync option
+
+### 🐛 Known Issues
+- None reported
 
 ---
 
 ## Version History
 
-- **1.0.0** - Initial release with full feature set
-- **0.1.0** - Internal beta with Supabase backend (deprecated)
+### Version Format
+- **MAJOR** version for incompatible API changes
+- **MINOR** version for new functionality (backwards compatible)
+- **PATCH** version for backwards compatible bug fixes
 
-## Migration Notes
-
-### From 0.x to 1.0
-- **Breaking Change**: Supabase backend removed
-- All data now stored in browser localStorage
-- No migration path needed (fresh start)
-- Admin password remains: `eXplorance`
-
-### Upgrade Instructions
-1. Pull latest code
-2. Run `npm install`
-3. Run `npm run build`
-4. Deploy to GitHub Pages
+### Release Dates
+- **1.0.0** - 2026-01-06 - Initial release
 
 ---
 
-**Note**: This project follows semantic versioning. Breaking changes will increment the major version.
+## Migration Guides
+
+### From Pre-1.0 Versions
+This is the initial release. No migration needed.
+
+---
+
+## Support
+
+For questions or issues:
+1. Check the [README.md](./README.md)
+2. Review [DEPLOYMENT.md](./DEPLOYMENT.md)
+3. Consult [CONTRIBUTING.md](./CONTRIBUTING.md)
+4. Open a GitHub issue
+
+---
+
+**Maintained by the eXplorance Development Team**

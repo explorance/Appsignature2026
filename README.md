@@ -1,195 +1,207 @@
-# Email Signature Generator
+# 📧 Email Signature Generator - eXplorance
 
-A professional email signature generator for Explorance, built with React, TypeScript, and Tailwind CSS.
+Application web de génération de signatures email professionnelles avec panneau d'administration complet.
 
-> **🚀 NEW:** Fully migrated to GitHub Pages! No backend required, 100% privacy-focused, free forever.
-> 
-> **✅ QA VERIFIED:** Zero Supabase traces in application code - [View QA Report](./QA_REPORT.md)
+## 🌟 Fonctionnalités
 
-## 🎯 Quick Links
+### Interface Utilisateur
+- ✅ **Formulaire interactif** pour saisir les informations personnelles
+- ✅ **Aperçu en temps réel** de la signature générée
+- ✅ **Multi-langues** : Support français et anglais pour les disclaimers
+- ✅ **Sélection de bureaux** avec adresses et téléphones
+- ✅ **Bannières d'événements** organisées par catégories
+- ✅ **Logo cliquable** redirigeant vers le site de l'entreprise
+- ✅ **Bannières cliquables** avec liens optionnels configurables
 
-- **⭐ [QA COMPLETE](./00-QA-COMPLETE.md)** - QA verification passed!
-- **🚀 [READY TO DEPLOY](./READY_TO_DEPLOY.md)** - Deploy checklist
-- **📊 [QA Report](./QA_REPORT.md)** - Full QA details
-- **⚡ [5-Minute Setup](./QUICKSTART.md)** - Get running fast
-- **🚀 [Deploy Now](./DEPLOYMENT_GUIDE.md)** - Step-by-step deployment
-- **✅ [Setup Complete?](./SETUP_COMPLETE.md)** - Verify everything is ready
-- **🧪 [Testing Guide](./TESTING_GUIDE.md)** - Complete testing procedures
+### Panneau d'Administration
+- 🔒 **Protégé par mot de passe** (`eXplorance`)
+- 🏢 **Gestion des bureaux** (nom, adresse, téléphone)
+- 🎨 **Gestion des bannières** par catégories d'événements
+- 📋 **Configuration des champs** de formulaire (visible/masqué, requis/optionnel)
+- ⚙️ **Valeurs par défaut** :
+  - URL du logo de l'entreprise
+  - Site web de l'entreprise
+  - Disclaimers (français et anglais séparés)
 
-## 📚 Documentation
+### Génération de Signature
+- 📋 **Copie vers le presse-papiers** en un clic
+- 💾 **Téléchargement en fichier HTML**
+- 🎨 **HTML compatible** avec tous les clients email (Outlook, Gmail, etc.)
+- 🔗 **Liens cliquables** sur le logo et les bannières
 
-**New to this project?** Start here:
-- **[00-START-HERE.md](./00-START-HERE.md)** - 📘 Navigation hub - where to go next
-- **[QUICKSTART.md](./QUICKSTART.md)** - ⚡ 5-minute setup guide
+### Persistance des Données
+- 💾 **localStorage** pour sauvegarder toutes les configurations
+- 🔄 **Système de backup automatique** avant chaque modification
+- ✅ **Validation des données** avant sauvegarde
+- 🔐 **Restauration automatique** en cas d'erreur
+- 📤 **Export/Import JSON** pour backups manuels
 
-**Architecture & Infrastructure:**
-- **[INFRASTRUCTURE.md](./INFRASTRUCTURE.md)** - 🏗️ Infrastructure details (GitHub Pages, Vite, etc.)
-- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - 🏛️ Application architecture & design
+## 🚀 Démarrage Rapide
 
-- **[Deployment Guide](./DEPLOYMENT_GUIDE.md)** - Deploy to GitHub Pages
-- **[Deployment Checklist](./DEPLOYMENT_CHECKLIST.md)** - Pre/post deployment tasks
-- **[Contributing](./CONTRIBUTING.md)** - How to contribute
-- **[Project Summary](./PROJECT_SUMMARY.md)** - Complete project overview
-- **[Migration Summary](./MIGRATION_SUMMARY.md)** - Supabase to GitHub migration
-- **[Changelog](./CHANGELOG.md)** - Version history
-
-## Features
-
-- **User-Friendly Interface**: Simple form to fill out employee details
-- **Live Preview**: See your signature update in real-time
-- **Multi-Language Support**: Disclaimers available in English, French, or both
-- **Admin Panel**: Password-protected settings management
-- **Banner Categories**: Organize event banners by categories
-- **Export Options**: Copy to clipboard or download as HTML
-- **Responsive Design**: Works on desktop and mobile devices
-- **LocalStorage Persistence**: All settings saved locally in the browser
-
-## Admin Features
-
-- Manage office locations (address, phone numbers)
-- Configure banner categories and upload banner images
-- Set company logo URL
-- Customize disclaimer text (English & French)
-- Control form field visibility and requirements
-- Password protected (default: `eXplorance`)
-
-## Getting Started
+### Prérequis
+- Node.js 18.x ou 20.x
+- pnpm 8.x
 
 ### Installation
 
 ```bash
-npm install
+# Cloner le repository
+git clone <repository-url>
+cd email-signature-generator
+
+# Installer les dépendances
+pnpm install
+
+# Lancer le serveur de développement
+pnpm run dev
 ```
 
-### Development
+L'application sera accessible sur `http://localhost:5173`
+
+### Build pour la production
 
 ```bash
-npm run dev
+# Build l'application
+pnpm run build
+
+# Preview du build
+pnpm run preview
 ```
 
-### Build
-
-```bash
-npm run build
-```
-
-### Preview Build
-
-```bash
-npm run preview
-```
-
-## Deployment to GitHub Pages
-
-### Prerequisites
-
-1. Create a new GitHub repository
-2. Push your code to the repository
-
-### Setup GitHub Pages
-
-1. Go to your repository on GitHub
-2. Navigate to **Settings** → **Pages**
-3. Under **Build and deployment**:
-   - Source: Select **GitHub Actions**
-4. Push to the `main` branch to trigger automatic deployment
-
-The GitHub Actions workflow (`.github/workflows/deploy.yml`) will automatically:
-- Install dependencies
-- Build the project
-- Deploy to GitHub Pages
-
-Your app will be available at: `https://[your-username].github.io/[repository-name]/`
-
-### Manual Deployment
-
-If you prefer to deploy manually:
-
-```bash
-# Build the project
-npm run build
-
-# The built files will be in the `dist` directory
-# Upload the contents of `dist` to your hosting provider
-```
-
-## Project Structure
+## 📁 Structure du Projet
 
 ```
 /
-├── .github/
-│   └── workflows/
-│       └── deploy.yml          # GitHub Actions deployment workflow
+├── .github/workflows/          # Workflows GitHub Actions
+│   ├── ci.yml                 # CI Build & Test
+│   ├── deploy-github-pages.yml # Déploiement GitHub Pages
+│   └── deploy-azure.yml       # Déploiement Azure
 ├── src/
 │   ├── app/
 │   │   ├── components/
-│   │   │   ├── SignatureGenerator.tsx
-│   │   │   ├── AdminPanel.tsx
-│   │   │   └── ui/             # Reusable UI components
+│   │   │   ├── Dialog.tsx           # Dialog moderne (design Figma)
+│   │   │   ├── Toast.tsx            # Notifications toast
+│   │   │   ├── ToastContainer.tsx   # Gestionnaire de toasts
+│   │   │   ├── SignatureGenerator.tsx  # Interface principale
+│   │   │   └── AdminPanel.tsx       # Panneau d'administration
 │   │   ├── utils/
-│   │   │   └── signatureGenerator.ts
-│   │   ├── types.ts
-│   │   └── App.tsx
-│   └── styles/
-│       ├── index.css
-│       ├── tailwind.css
-│       └── theme.css
+│   │   │   └── dataManager.ts       # Gestion localStorage
+│   │   ├── types.ts                 # Types TypeScript
+│   │   └── App.tsx                  # Composant principal
+│   ├── imports/                     # Assets Figma importés
+│   ├── styles/
+│   │   ├── fonts.css               # Imports de polices
+│   │   ├── tailwind.css            # Tailwind CSS
+│   │   └── theme.css               # Thème personnalisé
+│   └── main.tsx                    # Point d'entrée
 ├── package.json
 ├── vite.config.ts
-└── README.md
+├── tsconfig.json
+├── DEPLOYMENT.md              # Guide de déploiement
+└── README.md                  # Ce fichier
 ```
 
-## Usage
+## 🎨 Technologies Utilisées
 
-### For Users
+- **React 18.3** - Framework UI
+- **TypeScript** - Typage statique
+- **Vite** - Build tool et dev server
+- **Tailwind CSS v4** - Styling
+- **Lucide React** - Icônes
+- **localStorage** - Persistance des données
 
-1. Navigate to the "Generate Signature" tab
-2. Fill in your details:
-   - Full Name
-   - Job Title
-   - Email Address
-   - Office Location
-   - Cell Phone (optional)
-   - LinkedIn Profile (optional)
-   - Select a banner (optional)
-   - Choose disclaimer language
-3. Preview your signature in real-time
-4. Click "Copy to Clipboard" or "Download HTML"
-5. Paste into your email client settings
+## 🔧 Commandes Disponibles
 
-### For Administrators
+```bash
+# Développement
+pnpm run dev          # Lancer le serveur de développement
 
-1. Navigate to the "Admin Settings" tab
-2. Enter the admin password: `eXplorance`
-3. Configure:
-   - Office locations
-   - Banner categories and images
-   - Company logo URL
-   - Disclaimer text (English & French)
-   - Form field settings
-4. Click "Save Settings"
+# Production
+pnpm run build        # Build l'application
+pnpm run preview      # Preview du build de production
 
-## Technologies Used
+# Qualité du code
+pnpm run type-check   # Vérifier les types TypeScript
+```
 
-- **React 18** - UI framework
-- **TypeScript** - Type safety
-- **Vite** - Build tool
-- **Tailwind CSS** - Styling
-- **Radix UI** - Accessible components
-- **Lucide React** - Icons
-- **LocalStorage** - Data persistence
+## 🌐 Déploiement
 
-## Browser Compatibility
+L'application est prête pour le déploiement sur :
+- ✅ **GitHub Pages** (workflow configuré)
+- ✅ **Azure Static Web Apps** (workflow configuré)
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+Voir [DEPLOYMENT.md](./DEPLOYMENT.md) pour les instructions détaillées de configuration et déploiement.
 
-## License
+## 🔒 Sécurité et Données
 
-Private - Explorance Internal Use
+### Mot de passe Admin
+- Le panneau d'administration est protégé par le mot de passe : **`eXplorance`**
+- Le mot de passe est vérifié côté client uniquement
 
-## Support
+### Stockage des Données
+- Toutes les données sont stockées dans **localStorage** du navigateur
+- Aucune donnée n'est envoyée à un serveur externe
+- L'application fonctionne 100% côté client
+- Les données persistent entre les sessions
 
-For issues or questions, contact the development team.
+### Backup et Restauration
+- **Backup automatique** avant chaque modification
+- **Validation** des données avant sauvegarde
+- **Restauration automatique** en cas d'erreur
+- **Export/Import JSON** pour backups manuels
+
+## 📋 Utilisation
+
+### Pour les Utilisateurs
+
+1. Remplissez le formulaire avec vos informations personnelles
+2. Sélectionnez votre bureau dans la liste déroulante
+3. Choisissez une bannière d'événement (optionnel)
+4. Sélectionnez la langue du disclaimer (français, anglais, ou les deux)
+5. Prévisualisez votre signature en temps réel
+6. Cliquez sur "Copy to Clipboard" pour copier la signature
+7. Collez la signature dans votre client email (Outlook, Gmail, etc.)
+
+### Pour les Administrateurs
+
+1. Cliquez sur l'onglet "Admin Panel"
+2. Entrez le mot de passe : `eXplorance`
+3. Configurez :
+   - **Office Locations** : Ajoutez/modifiez les bureaux
+   - **Email Banners** : Gérez les catégories et bannières
+   - **Form Fields** : Contrôlez la visibilité des champs
+   - **Default Values** : Configurez le logo et les disclaimers
+4. Cliquez sur "Save Settings" pour sauvegarder
+5. Confirmez la sauvegarde dans le dialog
+
+## 🎯 Roadmap / Améliorations Futures
+
+- [ ] Support de templates de signatures multiples
+- [ ] Mode sombre
+- [ ] Export en multiple formats (HTML, TXT, RTF)
+- [ ] Historique des signatures générées
+- [ ] Import de données depuis CSV
+- [ ] Prévisualisation dans différents clients email
+
+## 🐛 Dépannage
+
+### L'application ne démarre pas
+- Vérifiez que Node.js 18+ est installé : `node -v`
+- Supprimez `node_modules` et réinstallez : `pnpm install`
+
+### Les données ne sont pas sauvegardées
+- Vérifiez que localStorage n'est pas désactivé dans votre navigateur
+- Ouvrez la console et recherchez des erreurs
+- Essayez de vider le cache : `localStorage.clear()`
+
+### Le build échoue
+- Vérifiez les erreurs TypeScript : `pnpm run type-check`
+- Assurez-vous que toutes les dépendances sont installées
+
+## 📄 License
+
+Ce projet est privé et propriétaire d'**eXplorance**.
+
+---
+
+**Développé avec ❤️ pour eXplorance**
