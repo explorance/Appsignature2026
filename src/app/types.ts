@@ -9,6 +9,7 @@ export interface Banner {
   id: string;
   name: string;
   imageUrl: string;
+  link?: string; // Optional link URL for the banner
 }
 
 export interface BannerCategory {

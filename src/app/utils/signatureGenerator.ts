@@ -44,12 +44,14 @@ export function generateSignatureHTML(
           </tr>`;
   }
 
-  // Company Logo - 36.5px height
+  // Company Logo - 36.5px height with clickable link to explorance.com
   if (settings.companyLogoUrl) {
     html += `
           <tr>
             <td style="padding: 0 0 8px 0;">
-              <img src="${escapeHtml(settings.companyLogoUrl)}" alt="Company Logo" style="height: 36.5px; display: block; margin: 0;" />
+              <a href="https://www.explorance.com" target="_blank" rel="noopener noreferrer" style="display: inline-block; text-decoration: none;">
+                <img src="${escapeHtml(settings.companyLogoUrl)}" alt="Company Logo" style="height: 36.5px; display: block; margin: 0;" />
+              </a>
             </td>
           </tr>`;
   }
@@ -145,12 +147,26 @@ ${escapeHtml(disclaimerText)}
     }
   }
 
-  // Banner (if selected)
+  // Banner (if selected) - with optional clickable link
   if (banner && banner.imageUrl) {
+    const bannerImg = `<img src="${escapeHtml(banner.imageUrl)}" alt="${escapeHtml(banner.name)}" style="max-width: 100%; height: auto; display: block; border-radius: 4px;" />`;
+    
     html += `
           <tr>
-            <td style="padding: 16px 0 0 0;">
-              <img src="${escapeHtml(banner.imageUrl)}" alt="${escapeHtml(banner.name)}" style="max-width: 100%; height: auto; display: block; border-radius: 4px;" />
+            <td style="padding: 16px 0 0 0;">`;
+    
+    // Wrap in link if banner has a URL
+    if (banner.link) {
+      html += `
+              <a href="${escapeHtml(banner.link)}" target="_blank" rel="noopener noreferrer" style="display: inline-block; text-decoration: none;">
+                ${bannerImg}
+              </a>`;
+    } else {
+      html += `
+              ${bannerImg}`;
+    }
+    
+    html += `
             </td>
           </tr>`;
   }

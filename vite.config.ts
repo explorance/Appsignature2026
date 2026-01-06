@@ -3,8 +3,10 @@ import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({
-  base: '/',
+export default defineConfig(({ mode }) => ({
+  // Use '/' for production (Azure/custom domain) or repository name for GitHub Pages
+  // Set VITE_BASE_PATH environment variable in GitHub Actions if needed
+  base: process.env.VITE_BASE_PATH || '/',
   plugins: [
     // The React and Tailwind plugins are both required for Make, even if
     // Tailwind is not being actively used – do not remove them
@@ -17,4 +19,4 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-})
+}))

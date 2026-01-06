@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Copy, Download, CheckCircle2 } from "lucide-react";
 import type { AdminSettings, SignatureData } from "../types";
 import { generateSignatureHTML } from "../utils/signatureGenerator";
+import CustomSelect from "./CustomSelect";
 
 interface SignatureGeneratorProps {
   settings: AdminSettings;
@@ -133,7 +134,7 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                   type="text"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  placeholder="Arnaud Friedel"
+                  placeholder="John Smith"
                   className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
@@ -149,7 +150,7 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                   type="text"
                   value={formData.jobTitle}
                   onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
-                  placeholder="VP Brand & Product Experience"
+                  placeholder="Senior Product Manager"
                   className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
@@ -177,18 +178,19 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                   {settings.fields.officeLocation.label}
                   {settings.fields.officeLocation.required && " *"}
                 </label>
-                <select
+                <CustomSelect
                   value={formData.officeLocation}
-                  onChange={(e) => setFormData({ ...formData, officeLocation: e.target.value })}
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                >
-                  <option value="">Select an office</option>
-                  {settings.offices.map((office) => (
-                    <option key={office.id} value={office.id}>
-                      {office.name}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(value) => setFormData({ ...formData, officeLocation: value })}
+                  options={[
+                    ...settings.offices.map((office) => ({
+                      value: office.id,
+                      label: office.name,
+                      description: office.address.split(',')[0],
+                      icon: 'location' as const
+                    }))
+                  ]}
+                  placeholder="Select an office"
+                />
               </div>
             )}
 
@@ -263,24 +265,26 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                 <label className="block mb-2 text-gray-900">
                   {settings.fields.banner.label}
                 </label>
-                <select
+                <CustomSelect
                   value={formData.selectedBannerCategoryId}
-                  onChange={(e) => {
+                  onChange={(value) => {
                     setFormData({ 
                       ...formData, 
-                      selectedBannerCategoryId: e.target.value,
+                      selectedBannerCategoryId: value,
                       selectedBannerId: "" // Reset banner selection when category changes
                     });
                   }}
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white mb-4"
-                >
-                  <option value="">No banner</option>
-                  {settings.bannerCategories.map((category) => (
-                    <option key={category.id} value={category.id}>
-                      {category.eventName}
-                    </option>
-                  ))}
-                </select>
+                  options={[
+                    { value: "", label: "No banner", description: "No event banner will be included" },
+                    ...settings.bannerCategories.map((category) => ({
+                      value: category.id,
+                      label: category.eventName,
+                      description: `${category.banners.length} banner${category.banners.length !== 1 ? 's' : ''} available`
+                    }))
+                  ]}
+                  placeholder="Select a banner category"
+                  className="mb-4"
+                />
 
                 {selectedCategory && selectedCategory.banners.length > 0 && (
                   <div className="space-y-3">
@@ -320,15 +324,16 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
             {/* Disclaimer Language Selection */}
             <div className="pt-6 border-t border-gray-200">
               <label className="block mb-2 text-gray-900">Disclaimer Language</label>
-              <select
+              <CustomSelect
                 value={formData.disclaimerLanguage}
-                onChange={(e) => setFormData({ ...formData, disclaimerLanguage: e.target.value as "english" | "french" | "both" })}
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-              >
-                <option value="english">English only</option>
-                <option value="french">French only</option>
-                <option value="both">Both (English + French)</option>
-              </select>
+                onChange={(value) => setFormData({ ...formData, disclaimerLanguage: value as "english" | "french" | "both" })}
+                options={[
+                  { value: "english", label: "English only", description: "Include English disclaimer", icon: 'language' },
+                  { value: "french", label: "French only", description: "Include French disclaimer (Français)", icon: 'language' },
+                  { value: "both", label: "Both Languages", description: "Include English + French disclaimers", icon: 'language' }
+                ]}
+                placeholder="Select disclaimer language"
+              />
             </div>
           </div>
         </div>
@@ -355,11 +360,18 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                 
                 {/* Company Logo */}
                 <div style={{ marginTop: "0px", marginBottom: "8px" }}>
-                  <img 
-                    src={settings.companyLogoUrl} 
-                    alt="Company Logo" 
-                    style={{ height: "36.5px", display: "block" }}
-                  />
+                  <a 
+                    href="https://www.explorance.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ display: "inline-block", cursor: "pointer" }}
+                  >
+                    <img 
+                      src={settings.companyLogoUrl} 
+                      alt="Company Logo" 
+                      style={{ height: "36.5px", display: "block" }}
+                    />
+                  </a>
                 </div>
                 
                 {/* Office Address */}
@@ -449,11 +461,26 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                 {/* Banner */}
                 {selectedBanner && (
                   <div style={{ marginTop: "16px" }}>
-                    <img 
-                      src={selectedBanner.imageUrl} 
-                      alt={selectedBanner.name}
-                      className="w-full rounded"
-                    />
+                    {selectedBanner.link ? (
+                      <a 
+                        href={selectedBanner.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        style={{ display: "inline-block", cursor: "pointer" }}
+                      >
+                        <img 
+                          src={selectedBanner.imageUrl} 
+                          alt={selectedBanner.name}
+                          className="w-full rounded"
+                        />
+                      </a>
+                    ) : (
+                      <img 
+                        src={selectedBanner.imageUrl} 
+                        alt={selectedBanner.name}
+                        className="w-full rounded"
+                      />
+                    )}
                   </div>
                 )}
               </div>

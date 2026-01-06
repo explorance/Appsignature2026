@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { Plus, Trash2, Eye, EyeOff, Save, Lock } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Plus, Trash2, Eye, EyeOff, Save, Lock, Check } from "lucide-react";
 import type { AdminSettings, Office, BannerCategory, Banner } from "../types";
+import Dialog from "./Dialog";
 
 interface AdminPanelProps {
   settings: AdminSettings;
@@ -13,6 +14,8 @@ export default function AdminPanel({ settings, onUpdate }: AdminPanelProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   
   // Ensure bannerCategories exists in settings
   const [localSettings, setLocalSettings] = useState<AdminSettings>(() => {
@@ -34,7 +37,14 @@ export default function AdminPanel({ settings, onUpdate }: AdminPanelProps) {
   };
 
   const handleSave = async () => {
+    setShowSaveDialog(true);
+  };
+
+  const confirmSave = async () => {
+    setShowSaveDialog(false);
+    setIsSaving(true);
     const result = await onUpdate(localSettings, password);
+    setIsSaving(false);
     if (result.success) {
       alert("Settings saved successfully!");
     } else {
@@ -236,6 +246,17 @@ export default function AdminPanel({ settings, onUpdate }: AdminPanelProps) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Save Confirmation Dialog */}
+      <Dialog
+        isOpen={showSaveDialog}
+        onClose={() => setShowSaveDialog(false)}
+        onConfirm={confirmSave}
+        title="Save Settings"
+        description="Are you sure you want to save these changes? All settings will be updated immediately."
+        confirmText="Save"
+        cancelText="Cancel"
+      />
+      
       <div className="bg-white rounded-2xl shadow-sm">
         {/* Section Tabs */}
         <div className="border-b border-gray-200">
@@ -403,15 +424,29 @@ export default function AdminPanel({ settings, onUpdate }: AdminPanelProps) {
                                 placeholder="Image URL (e.g., https://example.com/banner.jpg)"
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                               />
+                              <input
+                                type="url"
+                                value={banner.link || ""}
+                                onChange={(e) => updateBanner(category.id, banner.id, "link", e.target.value)}
+                                placeholder="Link URL (optional - e.g., https://explorance.com/event)"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                              />
                               {banner.imageUrl && (
-                                <img 
-                                  src={banner.imageUrl} 
-                                  alt={banner.name || "Banner preview"}
-                                  className="w-full h-24 object-cover rounded border border-gray-200"
-                                  onError={(e) => {
-                                    e.currentTarget.style.display = 'none';
-                                  }}
-                                />
+                                <div className="relative">
+                                  <img 
+                                    src={banner.imageUrl} 
+                                    alt={banner.name || "Banner preview"}
+                                    className="w-full h-24 object-cover rounded border border-gray-200"
+                                    onError={(e) => {
+                                      e.currentTarget.style.display = 'none';
+                                    }}
+                                  />
+                                  {banner.link && (
+                                    <div className="absolute top-2 right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded">
+                                      Clickable
+                                    </div>
+                                  )}
+                                </div>
                               )}
                             </div>
                             <button

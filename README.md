@@ -2,12 +2,32 @@
 
 A professional email signature generator for Explorance, built with React, TypeScript, and Tailwind CSS.
 
+> **🚀 NEW:** Fully migrated to GitHub Pages! No backend required, 100% privacy-focused, free forever.
+> 
+> **✅ QA VERIFIED:** Zero Supabase traces in application code - [View QA Report](./QA_REPORT.md)
+
+## 🎯 Quick Links
+
+- **⭐ [QA COMPLETE](./00-QA-COMPLETE.md)** - QA verification passed!
+- **🚀 [READY TO DEPLOY](./READY_TO_DEPLOY.md)** - Deploy checklist
+- **📊 [QA Report](./QA_REPORT.md)** - Full QA details
+- **⚡ [5-Minute Setup](./QUICKSTART.md)** - Get running fast
+- **🚀 [Deploy Now](./DEPLOYMENT_GUIDE.md)** - Step-by-step deployment
+- **✅ [Setup Complete?](./SETUP_COMPLETE.md)** - Verify everything is ready
+- **🧪 [Testing Guide](./TESTING_GUIDE.md)** - Complete testing procedures
+
 ## 📚 Documentation
 
-- **[Quick Start Guide](./QUICKSTART.md)** - Get running in 5 minutes
+**New to this project?** Start here:
+- **[00-START-HERE.md](./00-START-HERE.md)** - 📘 Navigation hub - where to go next
+- **[QUICKSTART.md](./QUICKSTART.md)** - ⚡ 5-minute setup guide
+
+**Architecture & Infrastructure:**
+- **[INFRASTRUCTURE.md](./INFRASTRUCTURE.md)** - 🏗️ Infrastructure details (GitHub Pages, Vite, etc.)
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - 🏛️ Application architecture & design
+
 - **[Deployment Guide](./DEPLOYMENT_GUIDE.md)** - Deploy to GitHub Pages
 - **[Deployment Checklist](./DEPLOYMENT_CHECKLIST.md)** - Pre/post deployment tasks
-- **[Architecture](./ARCHITECTURE.md)** - Technical architecture details
 - **[Contributing](./CONTRIBUTING.md)** - How to contribute
 - **[Project Summary](./PROJECT_SUMMARY.md)** - Complete project overview
 - **[Migration Summary](./MIGRATION_SUMMARY.md)** - Supabase to GitHub migration
