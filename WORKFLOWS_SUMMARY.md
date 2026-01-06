@@ -2,9 +2,9 @@
 
 ## 🎉 Ce qui a été créé
 
-### 1. **GitHub Actions Workflows** (.github/workflows/)
+### 1. **GitHub Actions Workflows** (.github/workflow/)
 
-#### ✅ `ci.yml` - Intégration Continue
+#### ✅ `ci.yml` - Intégration Continue (modifié manuellement)
 - **Déclencheurs** : Push et PR sur `main` et `develop`
 - **Tests** : Build sur Node.js 18.x et 20.x
 - **Vérifications** :
@@ -13,7 +13,7 @@
   - Build de production
   - Validation du dossier `dist/`
 
-#### ✅ `deploy-github-pages.yml` - Déploiement GitHub Pages
+#### ✅ `deploy-github-pages.yml` - Déploiement GitHub Pages (modifié manuellement)
 - **Déclencheurs** : Push sur `main` + déploiement manuel
 - **Actions** :
   - Build avec pnpm
@@ -22,7 +22,7 @@
   - Déploiement automatique
 - **URL** : `https://<username>.github.io/<repo-name>/`
 
-#### ✅ `deploy-azure.yml` - Déploiement Azure Static Web Apps
+#### ✅ `deploy-azure.yml` - Déploiement Azure Static Web Apps (modifié manuellement)
 - **Déclencheurs** : Push + PR sur `main`
 - **Actions** :
   - Build avec pnpm
@@ -30,6 +30,26 @@
   - Environnements de preview pour PRs
   - Nettoyage automatique à la fermeture des PRs
 - **Requis** : Secret `AZURE_STATIC_WEB_APPS_API_TOKEN`
+
+#### ✅ `azure-static-web-apps.yml` - Azure CI/CD Complet
+- **Déclencheurs** : Push, PR, et manuel
+- **Actions** :
+  - Build avec npm
+  - Déploiement Azure avec preview PRs
+  - Job séparé pour fermer les PRs
+
+#### ✅ `deploy-all.yml` - Déploiement Multi-Plateformes
+- **Déclencheurs** : Push sur `main` + manuel
+- **Actions** :
+  - Build unique partagé
+  - Déploiement parallèle GitHub Pages + Azure
+  - Artifacts partagés entre jobs
+
+#### ✅ `deploy.yml` - GitHub Pages Simple
+- **Déclencheurs** : Push sur `main` + manuel
+- **Actions** :
+  - Build et déploiement GitHub Pages
+  - Configuration simple et rapide
 
 ---
 
