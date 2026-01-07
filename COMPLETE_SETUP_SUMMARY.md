@@ -189,8 +189,6 @@ TOTAL:                $0/month 🎉
 - `INFRASTRUCTURE.md` - Infrastructure details
 - `ARCHITECTURE.md` - Application architecture
 - `PROJECT_SUMMARY.md` - Complete overview
-- `MIGRATION_SUMMARY.md` - Supabase migration
-- `FINAL_CLEAN_VERIFICATION.md` - QA report
 
 #### Deployment (5 files)
 - `DEPLOYMENT_CHECKLIST.md` - Deployment tasks

@@ -6,6 +6,10 @@ A professional email signature generator for Explorance, built with React, TypeS
 > 
 > **✅ QA VERIFIED:** Zero Supabase traces in application code - [View QA Report](./QA_REPORT.md)
 
+> **🔧 GITHUB ACTIONS FIXED:** Workflows now properly configured in `.github/workflows/`
+>
+> **⚠️ IMPORTANT:** If you're experiencing issues with GitHub Actions, start here: [START_HERE_GITHUB_FIX.md](./START_HERE_GITHUB_FIX.md)
+
 ## 🎯 Quick Links
 
 - **⭐ [QA COMPLETE](./00-QA-COMPLETE.md)** - QA verification passed!
@@ -19,8 +23,16 @@ A professional email signature generator for Explorance, built with React, TypeS
 ## 📚 Documentation
 
 **New to this project?** Start here:
+- **[QUOI_FAIRE_MAINTENANT.md](./QUOI_FAIRE_MAINTENANT.md)** - ⭐ **COMMENCEZ ICI** (2 minutes pour tout régler!)
+- **[DOCUMENTATION_INDEX.md](./DOCUMENTATION_INDEX.md)** - 📚 Index complet de la documentation
+- **[START_HERE_GITHUB_FIX.md](./START_HERE_GITHUB_FIX.md)** - 🔧 **COMMENCEZ ICI** pour résoudre les problèmes GitHub
 - **[00-START-HERE.md](./00-START-HERE.md)** - 📘 Navigation hub - where to go next
 - **[QUICKSTART.md](./QUICKSTART.md)** - ⚡ 5-minute setup guide
+
+**GitHub Synchronization:**
+- **[GITHUB_SYNC_GUIDE.md](./GITHUB_SYNC_GUIDE.md)** - 🔄 Guide complet de synchronisation Git/GitHub
+- **[FILES_TO_COMMIT.md](./FILES_TO_COMMIT.md)** - 📋 Liste des fichiers à commiter
+- **[CLEANUP_STEPS.md](./CLEANUP_STEPS.md)** - 🧹 Étapes de nettoyage du repo
 
 **Architecture & Infrastructure:**
 - **[INFRASTRUCTURE.md](./INFRASTRUCTURE.md)** - 🏗️ Infrastructure details (GitHub Pages, Vite, etc.)

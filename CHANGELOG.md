@@ -60,13 +60,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Responsive breakpoints
 - Accessible components
 
-### Migration
-- Removed Supabase backend dependency
-- Converted to pure frontend application
-- Implemented localStorage persistence
-- Simplified deployment process
-- Enhanced privacy (no data transmission)
-
 ## [Unreleased]
 
 ### Planned
@@ -83,22 +76,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version History
 
 - **1.0.0** - Initial release with full feature set
-- **0.1.0** - Internal beta with Supabase backend (deprecated)
-
-## Migration Notes
-
-### From 0.x to 1.0
-- **Breaking Change**: Supabase backend removed
-- All data now stored in browser localStorage
-- No migration path needed (fresh start)
-- Admin password remains: `eXplorance`
 
 ### Upgrade Instructions
 1. Pull latest code
 2. Run `npm install`
 3. Run `npm run build`
 4. Deploy to GitHub Pages
-
----
-
-**Note**: This project follows semantic versioning. Breaking changes will increment the major version.
