@@ -1,21 +1,28 @@
 import { useState, useEffect } from "react";
-import { Plus, Trash2, Eye, EyeOff, Save, Lock, Check } from "lucide-react";
+import { Plus, Trash2, Eye, EyeOff, Save, Lock, Check, RotateCcw } from "lucide-react";
 import type { AdminSettings, Office, BannerCategory, Banner } from "../types";
 import Dialog from "./Dialog";
 
 interface AdminPanelProps {
   settings: AdminSettings;
   onUpdate: (settings: AdminSettings, password: string) => Promise<{ success: boolean; error?: string }>;
+  defaultSettings: AdminSettings;
 }
 
 const ADMIN_PASSWORD = "eXplorance";
 
-export default function AdminPanel({ settings, onUpdate }: AdminPanelProps) {
+export default function AdminPanel({ settings, onUpdate, defaultSettings }: AdminPanelProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
-  const [showSaveDialog, setShowSaveDialog] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  
+  // Dialog states
+  const [dialogState, setDialogState] = useState<{
+    isOpen: boolean;
+    type: 'resetOffices' | 'deleteOffice' | 'minOfficeError' | null;
+    officeId?: string;
+  }>({ isOpen: false, type: null });
   
   // Ensure bannerCategories exists in settings
   const [localSettings, setLocalSettings] = useState<AdminSettings>(() => {
@@ -37,11 +44,6 @@ export default function AdminPanel({ settings, onUpdate }: AdminPanelProps) {
   };
 
   const handleSave = async () => {
-    setShowSaveDialog(true);
-  };
-
-  const confirmSave = async () => {
-    setShowSaveDialog(false);
     setIsSaving(true);
     const result = await onUpdate(localSettings, password);
     setIsSaving(false);
@@ -125,13 +127,66 @@ export default function AdminPanel({ settings, onUpdate }: AdminPanelProps) {
 
   const deleteOffice = (id: string) => {
     if (localSettings.offices.length <= 1) {
-      alert("You must have at least one office location.");
+      setDialogState({ isOpen: true, type: 'minOfficeError' });
       return;
     }
-    setLocalSettings({
-      ...localSettings,
-      offices: localSettings.offices.filter((office) => office.id !== id),
-    });
+    setDialogState({ isOpen: true, type: 'deleteOffice', officeId: id });
+  };
+
+  const resetOffices = () => {
+    setDialogState({ isOpen: true, type: 'resetOffices' });
+  };
+
+  const handleDialogConfirm = () => {
+    if (dialogState.type === 'resetOffices') {
+      setLocalSettings({
+        ...localSettings,
+        offices: defaultSettings.offices,
+      });
+    } else if (dialogState.type === 'deleteOffice' && dialogState.officeId) {
+      setLocalSettings({
+        ...localSettings,
+        offices: localSettings.offices.filter((office) => office.id !== dialogState.officeId),
+      });
+    }
+    setDialogState({ isOpen: false, type: null });
+  };
+
+  const handleDialogClose = () => {
+    setDialogState({ isOpen: false, type: null });
+  };
+
+  const getDialogProps = () => {
+    switch (dialogState.type) {
+      case 'resetOffices':
+        return {
+          title: 'Reset to Default Offices',
+          description: 'Are you sure you want to reset all offices to default? This will replace all current offices with the default ones.',
+          confirmText: 'Reset',
+          cancelText: 'Cancel',
+        };
+      case 'deleteOffice':
+        return {
+          title: 'Delete Office',
+          description: 'Are you sure you want to delete this office? This action cannot be undone.',
+          confirmText: 'Delete',
+          cancelText: 'Cancel',
+        };
+      case 'minOfficeError':
+        return {
+          title: 'Cannot Delete Office',
+          description: 'You must have at least one office location.',
+          confirmText: 'OK',
+          cancelText: '',
+        };
+      default:
+        return {
+          title: '',
+          description: '',
+          confirmText: 'OK',
+          cancelText: 'Cancel',
+        };
+    }
   };
 
   const addBannerCategory = () => {
@@ -246,17 +301,6 @@ export default function AdminPanel({ settings, onUpdate }: AdminPanelProps) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      {/* Save Confirmation Dialog */}
-      <Dialog
-        isOpen={showSaveDialog}
-        onClose={() => setShowSaveDialog(false)}
-        onConfirm={confirmSave}
-        title="Save Settings"
-        description="Are you sure you want to save these changes? All settings will be updated immediately."
-        confirmText="Save"
-        cancelText="Cancel"
-      />
-      
       <div className="bg-white rounded-2xl shadow-sm">
         {/* Section Tabs */}
         <div className="border-b border-gray-200">
@@ -320,7 +364,7 @@ export default function AdminPanel({ settings, onUpdate }: AdminPanelProps) {
                         />
                       </div>
                       <div>
-                        <label className="block mb-2 text-sm text-gray-700">Phone Number</label>
+                        <label className="block mb-2 text-sm text-gray-700">Phone Number <span className="text-gray-500">(Optional)</span></label>
                         <input
                           type="text"
                           value={office.phone}
@@ -351,6 +395,15 @@ export default function AdminPanel({ settings, onUpdate }: AdminPanelProps) {
                     </div>
                   </div>
                 ))}
+              </div>
+              <div className="mt-6">
+                <button
+                  onClick={resetOffices}
+                  className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  <RotateCcw className="size-4" />
+                  Reset to Default
+                </button>
               </div>
             </div>
           )}
@@ -636,20 +689,29 @@ export default function AdminPanel({ settings, onUpdate }: AdminPanelProps) {
                 setIsAuthenticated(false);
                 setPassword("");
               }}
-              className="text-gray-600 hover:text-gray-900"
+              className="text-gray-600 hover:text-gray-900 transition-colors"
             >
               Logout
             </button>
             <button
               onClick={handleSave}
-              className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              disabled={isSaving}
+              className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Save className="size-4" />
-              Save Settings
+              {isSaving ? 'Saving...' : 'Save Settings'}
             </button>
           </div>
         </div>
       </div>
+
+      {/* Dialog Component */}
+      <Dialog
+        isOpen={dialogState.isOpen}
+        onClose={handleDialogClose}
+        onConfirm={dialogState.type === 'minOfficeError' ? handleDialogClose : handleDialogConfirm}
+        {...getDialogProps()}
+      />
     </div>
   );
 }

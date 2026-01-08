@@ -125,17 +125,19 @@ export default function Dialog({
         <div className="bg-white w-full">
           <div className="flex items-end justify-end px-[24px] py-[16px] w-full">
             <div className="flex gap-[16px] h-[41px] items-center grow">
-              {/* Cancel Button */}
-              <button
-                onClick={onClose}
-                className="basis-0 bg-white grow h-full min-h-px min-w-px rounded-[36px] border border-[#e5e8eb] hover:bg-[#f2f3f5] transition-colors"
-              >
-                <div className="flex items-center justify-center size-full px-[16px] py-[12px]">
-                  <p className="font-['Lato',sans-serif] font-bold leading-normal not-italic text-[#0f131c] text-[14px] text-center text-nowrap">
-                    {cancelText}
-                  </p>
-                </div>
-              </button>
+              {/* Cancel Button - Only show if cancelText is provided */}
+              {cancelText && (
+                <button
+                  onClick={onClose}
+                  className="basis-0 bg-white grow h-full min-h-px min-w-px rounded-[36px] border border-[#e5e8eb] hover:bg-[#f2f3f5] transition-colors"
+                >
+                  <div className="flex items-center justify-center size-full px-[16px] py-[12px]">
+                    <p className="font-['Lato',sans-serif] font-bold leading-normal not-italic text-[#0f131c] text-[14px] text-center text-nowrap">
+                      {cancelText}
+                    </p>
+                  </div>
+                </button>
+              )}
               
               {/* Confirm Button */}
               <button

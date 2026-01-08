@@ -3,7 +3,7 @@ import type { AdminSettings } from "../types";
 const STORAGE_KEY = "emailSignatureSettings";
 const BACKUP_KEY = "emailSignatureSettings_backup";
 const VERSION_KEY = "emailSignatureSettings_version";
-const CURRENT_VERSION = "1.0";
+const CURRENT_VERSION = "2.1"; // Updated version to force immediate refresh
 
 interface SaveResult {
   success: boolean;
@@ -39,10 +39,11 @@ export function validateSettings(settings: AdminSettings): boolean {
 
     // Validate each office
     for (const office of settings.offices) {
-      if (!office.id || !office.name || !office.address || !office.phone) {
+      if (!office.id || !office.name || !office.address) {
         console.error("Invalid office structure:", office);
         return false;
       }
+      // Phone is optional, so we don't check for it
     }
 
     // Validate each banner category

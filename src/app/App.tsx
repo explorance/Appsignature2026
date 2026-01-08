@@ -16,9 +16,27 @@ const DEFAULT_SETTINGS: AdminSettings = {
     },
     {
       id: "2",
-      name: "New York",
-      address: "123 Broadway, Suite 200, New York, NY, USA 10001",
-      phone: "+1.212.555.1234",
+      name: "Amman",
+      address: "King Hussein Business Park, Building OA2, Second Floor, Office B202, Amman, Building OA2, Jordan",
+      phone: "",
+    },
+    {
+      id: "3",
+      name: "Chennai",
+      address: "2nd Floor, Workez, Urban Square Building, OMR Road, next to Turyaa Hotel, Perungudi, Chennai, Tamil Nadu 600041, India",
+      phone: "",
+    },
+    {
+      id: "4",
+      name: "Ho Chi Minh City",
+      address: "WeWork - Lim Tower 3, 29A Nguyen Dinh Chieu, Saigon Ward, Level 4 W125, Ho Chi Minh City, Ho Chi Minh City, Vietnam, Viet Nam",
+      phone: "",
+    },
+    {
+      id: "5",
+      name: "Melbourne",
+      address: "222 Exhibition Street, Level 7, Melbourne, Victoria 3000, Australia",
+      phone: "",
     },
   ],
   bannerCategories: [
@@ -66,6 +84,25 @@ export default function App() {
 
   // Load settings from localStorage on mount
   useEffect(() => {
+    // Check version and clear old data if version changed
+    const storedVersion = localStorage.getItem('emailSignatureSettings_version');
+    const CURRENT_VERSION = '2.1';
+    
+    if (!storedVersion || storedVersion !== CURRENT_VERSION) {
+      // Version changed or first load, clear old data to force refresh with new defaults
+      console.log('Version mismatch or first load. Clearing old data and loading defaults...');
+      localStorage.removeItem('emailSignatureSettings');
+      localStorage.removeItem('emailSignatureSettings_backup');
+      localStorage.setItem('emailSignatureSettings_version', CURRENT_VERSION);
+      
+      // Load and save default settings
+      setSettings(DEFAULT_SETTINGS);
+      saveSettings(DEFAULT_SETTINGS).then(() => {
+        addToast('success', 'Application updated with new office locations!');
+      });
+      return;
+    }
+    
     const result = loadSettings(DEFAULT_SETTINGS);
     if (result.success && result.data) {
       setSettings(result.data);
@@ -147,7 +184,7 @@ export default function App() {
         {activeTab === "generator" ? (
           <SignatureGenerator settings={settings} />
         ) : (
-          <AdminPanel settings={settings} onUpdate={handleUpdateSettings} />
+          <AdminPanel settings={settings} onUpdate={handleUpdateSettings} defaultSettings={DEFAULT_SETTINGS} />
         )}
       </main>
 
