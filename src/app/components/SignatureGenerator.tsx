@@ -222,7 +222,7 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                   type="tel"
                   value={formData.cellPhone}
                   onChange={(e) => setFormData({ ...formData, cellPhone: e.target.value })}
-                  placeholder="+1.514.713.5327"
+                  placeholder="+1.555.123.4567"
                   className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
@@ -369,7 +369,7 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                     <img 
                       src={settings.companyLogoUrl} 
                       alt="Company Logo" 
-                      style={{ height: "36.5px", display: "block" }}
+                      style={{ height: "36.5px", display: "block", border: "0" }}
                     />
                   </a>
                 </div>
@@ -471,14 +471,14 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                         <img 
                           src={selectedBanner.imageUrl} 
                           alt={selectedBanner.name}
-                          className="w-full rounded"
+                          style={{ width: "100%", maxWidth: "600px", height: "auto", display: "block", border: "0", borderRadius: "4px" }}
                         />
                       </a>
                     ) : (
                       <img 
                         src={selectedBanner.imageUrl} 
                         alt={selectedBanner.name}
-                        className="w-full rounded"
+                        style={{ width: "100%", maxWidth: "600px", height: "auto", display: "block", border: "0", borderRadius: "4px" }}
                       />
                     )}
                   </div>

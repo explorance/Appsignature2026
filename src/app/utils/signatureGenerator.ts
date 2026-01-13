@@ -50,7 +50,7 @@ export function generateSignatureHTML(
           <tr>
             <td style="padding: 0 0 8px 0;">
               <a href="https://www.explorance.com" target="_blank" rel="noopener noreferrer" style="display: inline-block; text-decoration: none;">
-                <img src="${escapeHtml(settings.companyLogoUrl)}" alt="Company Logo" style="height: 36.5px; display: block; margin: 0;" />
+                <img src="${escapeHtml(settings.companyLogoUrl)}" alt="Company Logo" style="height: 36.5px; display: block; margin: 0; border: 0;" />
               </a>
             </td>
           </tr>`;
@@ -147,9 +147,9 @@ ${escapeHtml(disclaimerText)}
     }
   }
 
-  // Banner (if selected) - with optional clickable link
+  // Banner (if selected) - with optional clickable link, max 600px width
   if (banner && banner.imageUrl) {
-    const bannerImg = `<img src="${escapeHtml(banner.imageUrl)}" alt="${escapeHtml(banner.name)}" style="max-width: 100%; height: auto; display: block; border-radius: 4px;" />`;
+    const bannerImg = `<img src="${escapeHtml(banner.imageUrl)}" alt="${escapeHtml(banner.name)}" style="width: 100%; max-width: 600px; height: auto; display: block; border: 0; border-radius: 4px;" />`;
     
     html += `
           <tr>

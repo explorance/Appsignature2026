@@ -477,13 +477,9 @@ export default function AdminPanel({ settings, onUpdate, defaultSettings }: Admi
                                 placeholder="Image URL (e.g., https://example.com/banner.jpg)"
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                               />
-                              <input
-                                type="url"
-                                value={banner.link || ""}
-                                onChange={(e) => updateBanner(category.id, banner.id, "link", e.target.value)}
-                                placeholder="Link URL (optional - e.g., https://explorance.com/event)"
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                              />
+                              <p className="text-xs text-gray-500 mt-1">
+                                💡 Tip: Use optimized images (max 600px wide, &lt;200KB) for best email performance. Consider using <a href="https://tinypng.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">TinyPNG</a> or hosting on a CDN.
+                              </p>
                               {banner.imageUrl && (
                                 <div className="relative">
                                   <img 
