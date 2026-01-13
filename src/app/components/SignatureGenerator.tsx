@@ -432,32 +432,6 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                   </div>
                 )}
                 
-                {/* Disclaimer */}
-                {(settings.disclaimerEnglish || settings.disclaimerFrench) && (
-                  <div
-                    style={{ 
-                      fontFamily: "Arial, sans-serif", 
-                      fontSize: "11px", 
-                      lineHeight: "16.5px", 
-                      color: "#666666", 
-                      borderTop: "1px solid #e0e0e0", 
-                      paddingTop: "8px", 
-                      marginTop: "8px",
-                      whiteSpace: "pre-wrap"
-                    }}
-                  >
-                    {formData.disclaimerLanguage === "english" && settings.disclaimerEnglish}
-                    {formData.disclaimerLanguage === "french" && settings.disclaimerFrench}
-                    {formData.disclaimerLanguage === "both" && (
-                      <>
-                        {settings.disclaimerEnglish}
-                        {settings.disclaimerEnglish && settings.disclaimerFrench && "\n\n"}
-                        {settings.disclaimerFrench}
-                      </>
-                    )}
-                  </div>
-                )}
-                
                 {/* Banner */}
                 {selectedBanner && (
                   <div style={{ marginTop: "16px" }}>
@@ -480,6 +454,32 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                         alt={selectedBanner.name}
                         style={{ width: "100%", maxWidth: "600px", height: "auto", display: "block", border: "0", borderRadius: "4px" }}
                       />
+                    )}
+                  </div>
+                )}
+                
+                {/* Disclaimer */}
+                {(settings.disclaimerEnglish || settings.disclaimerFrench) && (
+                  <div
+                    style={{ 
+                      fontFamily: "Arial, sans-serif", 
+                      fontSize: "11px", 
+                      lineHeight: "16.5px", 
+                      color: "#666666", 
+                      borderTop: "1px solid #e0e0e0", 
+                      paddingTop: "16px", 
+                      marginTop: "16px",
+                      whiteSpace: "pre-wrap"
+                    }}
+                  >
+                    {formData.disclaimerLanguage === "english" && settings.disclaimerEnglish}
+                    {formData.disclaimerLanguage === "french" && settings.disclaimerFrench}
+                    {formData.disclaimerLanguage === "both" && (
+                      <>
+                        {settings.disclaimerEnglish}
+                        {settings.disclaimerEnglish && settings.disclaimerFrench && "\n\n"}
+                        {settings.disclaimerFrench}
+                      </>
                     )}
                   </div>
                 )}

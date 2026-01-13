@@ -118,35 +118,6 @@ export function generateSignatureHTML(
           </tr>`;
   }
 
-  // Disclaimer - Arial Regular 11px, line-height 16.5px, color #666, border-top #e0e0e0
-  if (settings.disclaimerEnglish || settings.disclaimerFrench) {
-    let disclaimerText = "";
-    
-    if (data.disclaimerLanguage === "english") {
-      disclaimerText = settings.disclaimerEnglish;
-    } else if (data.disclaimerLanguage === "french") {
-      disclaimerText = settings.disclaimerFrench;
-    } else if (data.disclaimerLanguage === "both") {
-      disclaimerText = settings.disclaimerEnglish;
-      if (settings.disclaimerEnglish && settings.disclaimerFrench) {
-        disclaimerText += "\n\n" + settings.disclaimerFrench;
-      } else if (settings.disclaimerFrench) {
-        disclaimerText = settings.disclaimerFrench;
-      }
-    }
-    
-    if (disclaimerText) {
-      html += `
-          <tr>
-            <td style="padding: 7.5px 0 0 0; border-top: 1px solid #e0e0e0;">
-              <p style="margin: 0; font-family: Arial, sans-serif; font-size: 11px; line-height: 16.5px; color: #666666; white-space: pre-wrap;">
-${escapeHtml(disclaimerText)}
-              </p>
-            </td>
-          </tr>`;
-    }
-  }
-
   // Banner (if selected) - with optional clickable link, max 600px width
   if (banner && banner.imageUrl) {
     const bannerImg = `<img src="${escapeHtml(banner.imageUrl)}" alt="${escapeHtml(banner.name)}" style="width: 100%; max-width: 600px; height: auto; display: block; border: 0; border-radius: 4px;" />`;
@@ -169,6 +140,35 @@ ${escapeHtml(disclaimerText)}
     html += `
             </td>
           </tr>`;
+  }
+
+  // Disclaimer - Arial Regular 11px, line-height 16.5px, color #666, border-top #e0e0e0
+  if (settings.disclaimerEnglish || settings.disclaimerFrench) {
+    let disclaimerText = "";
+    
+    if (data.disclaimerLanguage === "english") {
+      disclaimerText = settings.disclaimerEnglish;
+    } else if (data.disclaimerLanguage === "french") {
+      disclaimerText = settings.disclaimerFrench;
+    } else if (data.disclaimerLanguage === "both") {
+      disclaimerText = settings.disclaimerEnglish;
+      if (settings.disclaimerEnglish && settings.disclaimerFrench) {
+        disclaimerText += "\n\n" + settings.disclaimerFrench;
+      } else if (settings.disclaimerFrench) {
+        disclaimerText = settings.disclaimerFrench;
+      }
+    }
+    
+    if (disclaimerText) {
+      html += `
+          <tr>
+            <td style="padding: 16px 0 0 0; border-top: 1px solid #e0e0e0;">
+              <p style="margin: 0; font-family: Arial, sans-serif; font-size: 11px; line-height: 16.5px; color: #666666; white-space: pre-wrap;">
+${escapeHtml(disclaimerText)}
+              </p>
+            </td>
+          </tr>`;
+    }
   }
 
   html += `
