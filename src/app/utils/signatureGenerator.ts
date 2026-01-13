@@ -50,7 +50,7 @@ export function generateSignatureHTML(
           <tr>
             <td style="padding: 0 0 8px 0;">
               <a href="https://www.explorance.com" target="_blank" rel="noopener noreferrer" style="display: inline-block; text-decoration: none;">
-                <img src="${escapeHtml(settings.companyLogoUrl)}" alt="Company Logo" style="height: 36.5px; display: block; margin: 0; border: 0;" />
+                <img src="${escapeHtml(settings.companyLogoUrl)}" alt="Company Logo" style="height: 36.5px; max-width: 150px; width: auto; display: block; margin: 0; border: 0;" />
               </a>
             </td>
           </tr>`;
