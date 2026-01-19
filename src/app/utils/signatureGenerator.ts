@@ -9,16 +9,17 @@ export function generateSignatureHTML(
   const { fullName, jobTitle, cellPhone, companyWebsite, email, linkedin } = data;
 
   // Build the signature HTML with exact Figma specifications
+  // Optimized for Outlook compatibility - no backgrounds, no borders on containers
   let html = `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
 </head>
 <body style="margin: 0; padding: 0; font-family: Arial, sans-serif;">
-  <table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, sans-serif; max-width: 600px;">
+  <table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, sans-serif; max-width: 600px; border: none; background: none;">
     <tr>
-      <td style="padding: 0;">
-        <table cellpadding="0" cellspacing="0" border="0">`;
+      <td style="padding: 0; border: none; background: none;">
+        <table cellpadding="0" cellspacing="0" border="0" style="border: none; background: none;">`;
 
   // Name - Arial Bold 15px, line-height 22.5px
   if (fullName) {
@@ -44,13 +45,13 @@ export function generateSignatureHTML(
           </tr>`;
   }
 
-  // Company Logo - 36.5px height with clickable link to explorance.com
+  // Company Logo - max-width 100px, auto height, maintains aspect ratio
   if (settings.companyLogoUrl) {
     html += `
           <tr>
             <td style="padding: 0 0 8px 0;">
               <a href="https://www.explorance.com" target="_blank" rel="noopener noreferrer" style="display: inline-block; text-decoration: none;">
-                <img src="${escapeHtml(settings.companyLogoUrl)}" alt="Company Logo" style="height: 36.5px; display: block; margin: 0; border: 0;" />
+                <img src="${escapeHtml(settings.companyLogoUrl)}" alt="Company Logo" style="max-width: 100px; height: auto; display: block; margin: 0; border: 0;" />
               </a>
             </td>
           </tr>`;
@@ -118,9 +119,9 @@ export function generateSignatureHTML(
           </tr>`;
   }
 
-  // Banner (if selected) - with optional clickable link, max 600px width
+  // Banner (if selected) - with optional clickable link, max-width 400px, auto height, maintains aspect ratio
   if (banner && banner.imageUrl) {
-    const bannerImg = `<img src="${escapeHtml(banner.imageUrl)}" alt="${escapeHtml(banner.name)}" style="width: 100%; max-width: 600px; height: auto; display: block; border: 0; border-radius: 4px;" />`;
+    const bannerImg = `<img src="${escapeHtml(banner.imageUrl)}" alt="${escapeHtml(banner.name)}" style="max-width: 400px; height: auto; display: block; border: 0; border-radius: 4px;" />`;
     
     html += `
           <tr>

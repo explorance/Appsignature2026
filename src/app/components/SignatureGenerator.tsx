@@ -39,11 +39,45 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
     const html = generateSignatureHTML(formData, selectedOffice, selectedBanner, settings);
     
     try {
-      // Create a temporary div to hold the HTML content
+      // Extract only the inner table content (without DOCTYPE, html, body tags)
+      // This is more compatible with Outlook which adds its own wrapper
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const signatureTable = doc.querySelector('table');
+      
+      if (!signatureTable) {
+        throw new Error('Signature table not found');
+      }
+      
+      // Get the clean HTML without wrapper tags and backgrounds
+      const cleanHTML = signatureTable.outerHTML;
+      
+      // Try modern Clipboard API first (best for Outlook)
+      if (navigator.clipboard && window.ClipboardItem) {
+        const blobHtml = new Blob([cleanHTML], { type: 'text/html' });
+        const blobText = new Blob([signatureTable.textContent || ''], { type: 'text/plain' });
+        
+        const clipboardItem = new ClipboardItem({
+          'text/html': blobHtml,
+          'text/plain': blobText
+        });
+        
+        await navigator.clipboard.write([clipboardItem]);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+        return;
+      }
+      
+      // Fallback for browsers that don't support ClipboardItem
+      // Create a temporary element with the clean HTML
       const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = html;
+      tempDiv.innerHTML = cleanHTML;
       tempDiv.style.position = 'absolute';
       tempDiv.style.left = '-9999px';
+      tempDiv.style.top = '0';
+      // Important: no background, no border on the container
+      tempDiv.style.background = 'transparent';
+      tempDiv.style.border = 'none';
       document.body.appendChild(tempDiv);
 
       // Select the content
@@ -69,23 +103,9 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
         }
       }
     } catch (err) {
-      // Final fallback - copy plain text
-      const textarea = document.createElement('textarea');
-      textarea.value = html;
-      textarea.style.position = 'absolute';
-      textarea.style.left = '-9999px';
-      document.body.appendChild(textarea);
-      textarea.select();
-      
-      try {
-        document.execCommand('copy');
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      } catch (e) {
-        alert('Failed to copy. Please try downloading instead.');
-      } finally {
-        document.body.removeChild(textarea);
-      }
+      console.error('Copy error:', err);
+      // Final fallback - show instructions
+      alert('Please try the Download HTML button instead, then open the file and copy from there into Outlook.');
     }
   };
 
@@ -379,7 +399,7 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                     <img 
                       src={settings.companyLogoUrl} 
                       alt="Company Logo" 
-                      style={{ height: "36.5px", display: "block", border: "0" }}
+                      style={{ maxWidth: "100px", height: "auto", display: "block", border: "0" }}
                     />
                   </a>
                 </div>
@@ -455,14 +475,14 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                         <img 
                           src={selectedBanner.imageUrl} 
                           alt={selectedBanner.name}
-                          style={{ width: "100%", maxWidth: "600px", height: "auto", display: "block", border: "0", borderRadius: "4px" }}
+                          style={{ maxWidth: "400px", height: "auto", display: "block", border: "0", borderRadius: "4px" }}
                         />
                       </a>
                     ) : (
                       <img 
                         src={selectedBanner.imageUrl} 
                         alt={selectedBanner.name}
-                        style={{ width: "100%", maxWidth: "600px", height: "auto", display: "block", border: "0", borderRadius: "4px" }}
+                        style={{ maxWidth: "400px", height: "auto", display: "block", border: "0", borderRadius: "4px" }}
                       />
                     )}
                   </div>
