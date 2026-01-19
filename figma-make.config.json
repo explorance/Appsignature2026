@@ -1,8 +1,8 @@
 {
   "deployment": {
     "platforms": {
-      "github-pages": true,
-      "azure-static-web-apps": true
+      "vercel": true,
+      "github-pages": true
     }
   },
   "build": {

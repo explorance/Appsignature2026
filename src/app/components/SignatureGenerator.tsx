@@ -359,7 +359,6 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                 )}
                 
                 {/* Company Logo */}
-                {settings.companyLogoUrl && (
                 <div style={{ marginTop: "0px", marginBottom: "8px" }}>
                   <a 
                     href="https://www.explorance.com" 
@@ -370,11 +369,10 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                     <img 
                       src={settings.companyLogoUrl} 
                       alt="Company Logo" 
-                      style={{ height: "36.5px", maxWidth: "150px", width: "auto", display: "block", border: "0" }}
+                      style={{ height: "36.5px", display: "block", border: "0" }}
                     />
                   </a>
                 </div>
-                )}
                 
                 {/* Office Address */}
                 {selectedOffice && (

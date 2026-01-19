@@ -2,23 +2,18 @@
 
 A professional email signature generator for Explorance, built with React, TypeScript, and Tailwind CSS.
 
-> **🚀 NEW:** Fully migrated to GitHub Pages! No backend required, 100% privacy-focused, free forever.
+> **🚀 DEPLOYMENT:** Optimized for Vercel with GitHub integration - automatic deployments on every push!
 > 
-> **✅ QA VERIFIED:** Zero Supabase traces in application code - [View QA Report](./QA_REPORT.md)
-
-> **🔧 GITHUB ACTIONS FIXED:** Workflows now properly configured in `.github/workflows/`
+> **✅ ARCHITECTURE:** 100% frontend-only, localStorage persistence, zero backend dependencies
 >
-> **⚠️ IMPORTANT:** If you're experiencing issues with GitHub Actions, start here: [START_HERE_GITHUB_FIX.md](./START_HERE_GITHUB_FIX.md)
+> **⚡ QUICK START:** [Vercel Deployment Guide](./VERCEL_DEPLOYMENT.md) | [GitHub Workflow](./GITHUB_VERCEL_WORKFLOW.md)
 
 ## 🎯 Quick Links
 
-- **⭐ [QA COMPLETE](./00-QA-COMPLETE.md)** - QA verification passed!
-- **🚀 [READY TO DEPLOY](./READY_TO_DEPLOY.md)** - Deploy checklist
-- **📊 [QA Report](./QA_REPORT.md)** - Full QA details
+- **🚀 [Vercel Deployment](./VERCEL_DEPLOYMENT.md)** - Deploy to Vercel in minutes
+- **🔄 [GitHub Workflow](./GITHUB_VERCEL_WORKFLOW.md)** - Git + GitHub + Vercel workflow
+- **📚 [Documentation Index](./DOCUMENTATION_INDEX.md)** - Complete documentation
 - **⚡ [5-Minute Setup](./QUICKSTART.md)** - Get running fast
-- **🚀 [Deploy Now](./DEPLOYMENT_GUIDE.md)** - Step-by-step deployment
-- **✅ [Setup Complete?](./SETUP_COMPLETE.md)** - Verify everything is ready
-- **🧪 [Testing Guide](./TESTING_GUIDE.md)** - Complete testing procedures
 
 ## 📚 Documentation
 
@@ -91,39 +86,35 @@ npm run build
 npm run preview
 ```
 
-## Deployment to GitHub Pages
+## Deployment to Vercel
 
-### Prerequisites
+### Quick Deploy
 
-1. Create a new GitHub repository
-2. Push your code to the repository
-
-### Setup GitHub Pages
-
-1. Go to your repository on GitHub
-2. Navigate to **Settings** → **Pages**
-3. Under **Build and deployment**:
-   - Source: Select **GitHub Actions**
-4. Push to the `main` branch to trigger automatic deployment
-
-The GitHub Actions workflow (`.github/workflows/deploy.yml`) will automatically:
-- Install dependencies
-- Build the project
-- Deploy to GitHub Pages
-
-Your app will be available at: `https://[your-username].github.io/[repository-name]/`
-
-### Manual Deployment
-
-If you prefer to deploy manually:
-
+1. **Push to GitHub**:
 ```bash
-# Build the project
-npm run build
-
-# The built files will be in the `dist` directory
-# Upload the contents of `dist` to your hosting provider
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+git push -u origin main
 ```
+
+2. **Deploy to Vercel**:
+   - Go to [vercel.com](https://vercel.com)
+   - Click "Add New Project"
+   - Import your GitHub repository
+   - Click "Deploy"
+
+Vercel will automatically detect the Vite configuration and deploy your app.
+
+**For detailed instructions**: See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md)
+
+### Automatic Deployments
+
+Once connected:
+- ✅ **Production**: Auto-deploy on push to `main` branch
+- ✅ **Preview**: Auto-deploy on pull requests
+- ✅ **Instant Rollback**: One-click rollback in Vercel dashboard
 
 ## Project Structure
 
@@ -185,11 +176,12 @@ npm run build
 
 - **React 18** - UI framework
 - **TypeScript** - Type safety
-- **Vite** - Build tool
-- **Tailwind CSS** - Styling
+- **Vite** - Build tool and dev server
+- **Tailwind CSS v4** - Styling
 - **Radix UI** - Accessible components
 - **Lucide React** - Icons
 - **LocalStorage** - Data persistence
+- **Vercel** - Hosting and deployment
 
 ## Browser Compatibility
 
