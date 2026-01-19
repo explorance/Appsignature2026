@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banner Image Test - Explorance Email Signature</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .category {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .category-count {
+            background: #667eea;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .banner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .banner-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+        
+        .banner-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+        
+        .banner-image-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 3 / 1;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+        
+        .banner-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        
+        .banner-image.loading {
+            opacity: 0.5;
+        }
+        
+        .banner-image.error {
+            display: none;
+        }
+        
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        .error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #e53e3e;
+            font-size: 0.9rem;
+            padding: 20px;
+            display: none;
+        }
+        
+        .banner-image.error ~ .error-message {
+            display: block;
+        }
+        
+        .banner-info {
+            padding: 15px;
+            background: white;
+        }
+        
+        .banner-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .banner-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .status-success {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        
+        .status-error {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        
+        .status-loading {
+            background: #e6fffa;
+            color: #234e52;
+        }
+        
+        .banner-link {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #667eea;
+            word-break: break-all;
+        }
+        
+        .summary {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .summary h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .banner-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Banner Image Test - Explorance Email Signature</h1>
+        
+        <div class="summary">
+            <h2>📊 Test Summary</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalBanners">9</div>
+                    <div class="stat-label">Total Banners</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="loadedBanners">0</div>
+                    <div class="stat-label">Loaded Successfully</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="failedBanners">0</div>
+                    <div class="stat-label">Failed to Load</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="successRate">0%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="bannerCategories"></div>
+    </div>
+
+    <script>
+        const bannerData = [
+            {
+                id: "1",
+                eventName: "BlueX",
+                banners: [
+                    { id: "1-1", name: "Powerful Survey", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/Blue_X_Webinar_powerful_Survey_d6a9d8f25c.png", link: "https://www.explorance.com" },
+                    { id: "1-2", name: "Feedback Creator", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/Feedback_Creator_Blue_X_962b479778.png", link: "https://www.explorance.com" },
+                ]
+            },
+            {
+                id: "2",
+                eventName: "Explorance World 2026",
+                banners: [
+                    { id: "2-1", name: "EN (1)", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/EN_ew_Explorance_MAIL_1_1_df6b521744.png", link: "https://www.explorance.com/explorance-world" },
+                    { id: "2-2", name: "EN (2)", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/EN_ew_Explorance_MAIL_1_327918e5f3.png", link: "https://www.explorance.com/explorance-world" },
+                    { id: "2-3", name: "FR (1)", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/FR_ew_Explorance_MAIL_1_1_ad3aabb187.png", link: "https://www.explorance.com/explorance-world" },
+                    { id: "2-4", name: "FR (2)", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/FR_ew_Explorance_MAIL_1_f094927e6e.png", link: "https://www.explorance.com/explorance-world" },
+                ]
+            },
+            {
+                id: "3",
+                eventName: "MLY",
+                banners: [
+                    { id: "3-1", name: "AI-Powered", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/MLY_AI_Powered_61cdad667d.png", link: "https://www.explorance.com" },
+                ]
+            },
+            {
+                id: "4",
+                eventName: "Responsible AI",
+                banners: [
+                    { id: "4-1", name: "Version 1", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/Responsible_AI_01_cd9b31060e.png", link: "https://www.explorance.com" },
+                    { id: "4-2", name: "Version 2", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/Responsible_AI_02_32fb4f9939.png", link: "https://www.explorance.com" },
+                ]
+            }
+        ];
+
+        let loadedCount = 0;
+        let failedCount = 0;
+        const totalCount = bannerData.reduce((sum, cat) => sum + cat.banners.length, 0);
+
+        function updateStats() {
+            document.getElementById('loadedBanners').textContent = loadedCount;
+            document.getElementById('failedBanners').textContent = failedCount;
+            const successRate = totalCount > 0 ? Math.round((loadedCount / totalCount) * 100) : 0;
+            document.getElementById('successRate').textContent = successRate + '%';
+        }
+
+        function createBannerCard(banner) {
+            const card = document.createElement('div');
+            card.className = 'banner-card';
+            card.innerHTML = `
+                <div class="banner-image-container">
+                    <div class="loading-spinner"></div>
+                    <img 
+                        class="banner-image loading" 
+                        src="${banner.imageUrl}" 
+                        alt="${banner.name}"
+                        data-banner-id="${banner.id}"
+                    >
+                    <div class="error-message">
+                        ❌ Failed to load<br>
+                        <small>Image URL may be inaccessible</small>
+                    </div>
+                </div>
+                <div class="banner-info">
+                    <div class="banner-name">${banner.name}</div>
+                    <span class="banner-status status-loading" data-status="${banner.id}">⏳ Loading...</span>
+                    <div class="banner-link">🔗 ${banner.link}</div>
+                </div>
+            `;
+
+            const img = card.querySelector('.banner-image');
+            const status = card.querySelector('.banner-status');
+            const spinner = card.querySelector('.loading-spinner');
+
+            img.onload = function() {
+                img.classList.remove('loading');
+                spinner.style.display = 'none';
+                status.textContent = '✅ Loaded';
+                status.className = 'banner-status status-success';
+                loadedCount++;
+                updateStats();
+            };
+
+            img.onerror = function() {
+                img.classList.add('error');
+                spinner.style.display = 'none';
+                status.textContent = '❌ Failed';
+                status.className = 'banner-status status-error';
+                failedCount++;
+                updateStats();
+            };
+
+            return card;
+        }
+
+        function renderBanners() {
+            const container = document.getElementById('bannerCategories');
+            
+            bannerData.forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'category-header';
+                headerDiv.innerHTML = `
+                    <h2 class="category-title">${category.eventName}</h2>
+                    <span class="category-count">${category.banners.length} banner${category.banners.length !== 1 ? 's' : ''}</span>
+                `;
+                
+                const gridDiv = document.createElement('div');
+                gridDiv.className = 'banner-grid';
+                
+                category.banners.forEach(banner => {
+                    gridDiv.appendChild(createBannerCard(banner));
+                });
+                
+                categoryDiv.appendChild(headerDiv);
+                categoryDiv.appendChild(gridDiv);
+                container.appendChild(categoryDiv);
+            });
+        }
+
+        // Initialize
+        renderBanners();
+    </script>
+</body>
+</html>

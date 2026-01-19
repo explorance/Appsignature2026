@@ -3,7 +3,7 @@ import type { AdminSettings } from "../types";
 const STORAGE_KEY = "emailSignatureSettings";
 const BACKUP_KEY = "emailSignatureSettings_backup";
 const VERSION_KEY = "emailSignatureSettings_version";
-const CURRENT_VERSION = "2.1"; // Updated version to force immediate refresh
+const CURRENT_VERSION = "2.2"; // Updated version to force refresh with new banner data
 
 interface SaveResult {
   success: boolean;

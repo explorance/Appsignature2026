@@ -43,11 +43,35 @@ const DEFAULT_SETTINGS: AdminSettings = {
   bannerCategories: [
     {
       id: "1",
+      eventName: "BlueX",
+      banners: [
+        { id: "1-1", name: "Powerful Survey", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/Blue_X_Webinar_powerful_Survey_d6a9d8f25c.png", link: "https://www.explorance.com" },
+        { id: "1-2", name: "Feedback Creator", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/Feedback_Creator_Blue_X_962b479778.png", link: "https://www.explorance.com" },
+      ],
+    },
+    {
+      id: "2",
       eventName: "Explorance World 2026",
       banners: [
-        { id: "1-1", name: "FR (1)", imageUrl: "https://stonlinehelpprod01.blob.core.windows.net/web/assets/FR_ew_Explorance_MAIL-1.png", link: "https://www.explorance.com/explorance-world" },
-        { id: "1-2", name: "FR (2)", imageUrl: "https://stonlinehelpprod01.blob.core.windows.net/web/assets/FR_ew_Explorance_MAIL.png", link: "https://www.explorance.com/explorance-world" },
-        { id: "1-3", name: "EN", imageUrl: "https://stonlinehelpprod01.blob.core.windows.net/web/assets/EN_ew_Explorance_MAIL-1.png", link: "https://www.explorance.com/explorance-world" },
+        { id: "2-1", name: "EN (1)", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/EN_ew_Explorance_MAIL_1_1_df6b521744.png", link: "https://www.explorance.com/explorance-world" },
+        { id: "2-2", name: "EN (2)", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/EN_ew_Explorance_MAIL_1_327918e5f3.png", link: "https://www.explorance.com/explorance-world" },
+        { id: "2-3", name: "FR (1)", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/FR_ew_Explorance_MAIL_1_1_ad3aabb187.png", link: "https://www.explorance.com/explorance-world" },
+        { id: "2-4", name: "FR (2)", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/FR_ew_Explorance_MAIL_1_f094927e6e.png", link: "https://www.explorance.com/explorance-world" },
+      ],
+    },
+    {
+      id: "3",
+      eventName: "MLY",
+      banners: [
+        { id: "3-1", name: "AI-Powered", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/MLY_AI_Powered_61cdad667d.png", link: "https://www.explorance.com" },
+      ],
+    },
+    {
+      id: "4",
+      eventName: "Responsible AI",
+      banners: [
+        { id: "4-1", name: "Version 1", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/Responsible_AI_01_cd9b31060e.png", link: "https://www.explorance.com" },
+        { id: "4-2", name: "Version 2", imageUrl: "https://stmarketingwebprod01.blob.core.windows.net/web/assets/Responsible_AI_02_32fb4f9939.png", link: "https://www.explorance.com" },
       ],
     },
   ],
@@ -87,7 +111,7 @@ export default function App() {
   useEffect(() => {
     // Check version and clear old data if version changed
     const storedVersion = localStorage.getItem('emailSignatureSettings_version');
-    const CURRENT_VERSION = '2.1';
+    const CURRENT_VERSION = '2.2'; // Updated to force refresh with new banner data
     
     if (!storedVersion || storedVersion !== CURRENT_VERSION) {
       // Version changed or first load, clear old data to force refresh with new defaults
@@ -99,7 +123,7 @@ export default function App() {
       // Load and save default settings
       setSettings(DEFAULT_SETTINGS);
       saveSettings(DEFAULT_SETTINGS).then(() => {
-        addToast('success', 'Application updated with new office locations!');
+        addToast('success', 'Banners updated! New categories and images are now available.');
       });
       return;
     }

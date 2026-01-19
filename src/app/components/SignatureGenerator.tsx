@@ -288,28 +288,38 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
 
                 {selectedCategory && selectedCategory.banners.length > 0 && (
                   <div className="space-y-3">
-                    <p className="text-sm text-gray-600">Select a banner:</p>
-                    <div className="grid grid-cols-2 gap-3">
+                    <p className="text-sm text-gray-600">Select a banner from {selectedCategory.eventName}:</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[400px] overflow-y-auto">
                       {selectedCategory.banners.map((banner) => (
                         <button
                           key={banner.id}
                           onClick={() => setFormData({ ...formData, selectedBannerId: banner.id })}
-                          className={`relative border-2 rounded-lg overflow-hidden transition-all ${
+                          className={`relative border-2 rounded-lg overflow-hidden transition-all hover:shadow-md ${ 
                             formData.selectedBannerId === banner.id
                               ? "border-blue-500 ring-2 ring-blue-200"
                               : "border-gray-200 hover:border-gray-300"
                           }`}
                         >
-                          <img
-                            src={banner.imageUrl}
-                            alt={banner.name}
-                            className="w-full h-20 object-cover"
-                          />
-                          <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 text-white text-xs py-1 px-2 text-center">
+                          <div className="aspect-[3/1] bg-gray-100 flex items-center justify-center">
+                            <img
+                              src={banner.imageUrl}
+                              alt={banner.name}
+                              className="w-full h-full object-contain"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = 'none';
+                                const parent = target.parentElement;
+                                if (parent) {
+                                  parent.innerHTML = '<div class="text-gray-400 text-xs p-4">Image not available</div>';
+                                }
+                              }}
+                            />
+                          </div>
+                          <div className="bg-gradient-to-t from-black/75 to-transparent absolute bottom-0 left-0 right-0 text-white text-xs py-2 px-2 text-center font-medium">
                             {banner.name}
                           </div>
                           {formData.selectedBannerId === banner.id && (
-                            <div className="absolute top-2 right-2 bg-blue-500 text-white rounded-full p-1">
+                            <div className="absolute top-2 right-2 bg-blue-500 text-white rounded-full p-1 shadow-lg">
                               <CheckCircle2 className="size-4" />
                             </div>
                           )}
