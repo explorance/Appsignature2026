@@ -43,13 +43,13 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
       // This is more compatible with Outlook which adds its own wrapper
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
-      const signatureTable = doc.querySelector('table');
+      const signatureTable = doc.querySelector('body > table');
       
       if (!signatureTable) {
         throw new Error('Signature table not found');
       }
       
-      // Get the clean HTML without wrapper tags and backgrounds
+      // Get the clean HTML without wrapper tags
       const cleanHTML = signatureTable.outerHTML;
       
       // Try modern Clipboard API first (best for Outlook)
@@ -397,7 +397,7 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                     style={{ display: "inline-block", cursor: "pointer" }}
                   >
                     <img 
-                      src={settings.companyLogoUrl} 
+                      src="https://stmarketingwebprod01.blob.core.windows.net/web/assets/Logo_explorance_c02516dbd2.png" 
                       alt="Company Logo" 
                       style={{ maxWidth: "100px", height: "auto", display: "block", border: "0" }}
                     />
