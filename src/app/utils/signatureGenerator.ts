@@ -15,8 +15,8 @@ export function generateSignatureHTML(
 <head>
   <meta charset="UTF-8">
 </head>
-<body style="margin: 0; padding: 0;">
-  <table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, sans-serif; max-width: 600px; border-collapse: collapse;">
+<body style="margin: 0; padding: 0; background-color: transparent;">
+  <table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, sans-serif; max-width: 600px; border-collapse: collapse; background-color: transparent; border: 0;">
     <tbody>`;
 
   // Name - Arial Bold 15px, line-height 22.5px

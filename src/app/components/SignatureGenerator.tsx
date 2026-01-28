@@ -39,23 +39,62 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
     const html = generateSignatureHTML(formData, selectedOffice, selectedBanner, settings);
     
     try {
-      // Extract only the inner table content (without DOCTYPE, html, body tags)
-      // This is more compatible with Outlook which adds its own wrapper
+      // Parse the HTML to extract just the table content
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
       const signatureTable = doc.querySelector('body > table');
       
       if (!signatureTable) {
-        throw new Error('Signature table not found');
+        console.error('Table not found in generated HTML');
+        // Fallback: use the entire body content
+        const bodyContent = doc.body.innerHTML;
+        if (!bodyContent) {
+          throw new Error('No content generated');
+        }
+        
+        // Try to copy the body content instead
+        await copyToClipboard(bodyContent, doc.body.textContent || '');
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+        return;
       }
       
-      // Get the clean HTML without wrapper tags
+      // Get the clean HTML table
       const cleanHTML = signatureTable.outerHTML;
+      const cleanText = signatureTable.textContent || '';
       
-      // Try modern Clipboard API first (best for Outlook)
-      if (navigator.clipboard && window.ClipboardItem) {
-        const blobHtml = new Blob([cleanHTML], { type: 'text/html' });
-        const blobText = new Blob([signatureTable.textContent || ''], { type: 'text/plain' });
+      // Copy to clipboard
+      await copyToClipboard(cleanHTML, cleanText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+      
+    } catch (err) {
+      console.error('Copy error:', err);
+      alert('Unable to copy signature. Please try the Download HTML button instead, then open the file and copy from there into Outlook.');
+    }
+  };
+
+  // Helper function to handle clipboard operations
+  const copyToClipboard = async (htmlContent: string, textContent: string) => {
+    // Check if modern Clipboard API is available AND has permission
+    let canUseModernAPI = false;
+    
+    if (navigator.clipboard && window.ClipboardItem) {
+      try {
+        // Test if we have permission to use the Clipboard API
+        const permissionStatus = await navigator.permissions.query({ name: 'clipboard-write' as PermissionName });
+        canUseModernAPI = permissionStatus.state === 'granted' || permissionStatus.state === 'prompt';
+      } catch {
+        // If permissions API fails, try the clipboard anyway (some browsers don't support permissions.query)
+        canUseModernAPI = true;
+      }
+    }
+    
+    // Try modern Clipboard API first if available
+    if (canUseModernAPI) {
+      try {
+        const blobHtml = new Blob([htmlContent], { type: 'text/html' });
+        const blobText = new Blob([textContent], { type: 'text/plain' });
         
         const clipboardItem = new ClipboardItem({
           'text/html': blobHtml,
@@ -63,49 +102,46 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
         });
         
         await navigator.clipboard.write([clipboardItem]);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
+        console.log('Copied using modern Clipboard API');
         return;
+      } catch (clipboardError) {
+        console.warn('Modern Clipboard API failed, using fallback:', clipboardError);
       }
-      
-      // Fallback for browsers that don't support ClipboardItem
-      // Create a temporary element with the clean HTML
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = cleanHTML;
-      tempDiv.style.position = 'absolute';
-      tempDiv.style.left = '-9999px';
-      tempDiv.style.top = '0';
-      // Important: no background, no border on the container
-      tempDiv.style.background = 'transparent';
-      tempDiv.style.border = 'none';
-      document.body.appendChild(tempDiv);
+    }
+    
+    // Fallback: use execCommand with a temporary element
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
+    tempDiv.style.position = 'absolute';
+    tempDiv.style.left = '-9999px';
+    tempDiv.style.top = '0';
+    tempDiv.style.background = 'transparent';
+    tempDiv.style.border = 'none';
+    document.body.appendChild(tempDiv);
 
-      // Select the content
+    try {
       const range = document.createRange();
       range.selectNodeContents(tempDiv);
       const selection = window.getSelection();
+      
       if (selection) {
         selection.removeAllRanges();
         selection.addRange(range);
         
-        // Copy using execCommand
         const successful = document.execCommand('copy');
         
-        // Clean up
         selection.removeAllRanges();
-        document.body.removeChild(tempDiv);
         
-        if (successful) {
-          setCopied(true);
-          setTimeout(() => setCopied(false), 2000);
-        } else {
-          throw new Error('Copy failed');
+        if (!successful) {
+          throw new Error('execCommand copy failed');
         }
+        
+        console.log('Copied using execCommand fallback');
+      } else {
+        throw new Error('Selection not available');
       }
-    } catch (err) {
-      console.error('Copy error:', err);
-      // Final fallback - show instructions
-      alert('Please try the Download HTML button instead, then open the file and copy from there into Outlook.');
+    } finally {
+      document.body.removeChild(tempDiv);
     }
   };
 
