@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { Copy, Download, CheckCircle2 } from "lucide-react";
 import { generateSignatureHTML } from "../utils/signatureGenerator";
-import { AdminSettings, Office, SignatureData, Banner } from "../types";
+import type { AdminSettings, SignatureData } from "../types";
 import CustomSelect from "./CustomSelect";
-import explorance from "figma:asset/0819ad60d17469a4fa67185ad25cfbfa6e6fc986.png";
 
 interface SignatureGeneratorProps {
   settings: AdminSettings;
@@ -434,7 +433,7 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                     style={{ display: "inline-block", cursor: "pointer" }}
                   >
                     <img 
-                      src={explorance} 
+                      src={settings.companyLogoUrl}
                       alt="Company Logo" 
                       style={{ maxWidth: "155px", height: "auto", display: "block", border: "0" }}
                     />

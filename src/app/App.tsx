@@ -80,7 +80,7 @@ const DEFAULT_SETTINGS: AdminSettings = {
   disclaimerFrench:
     "Avis de Confidentialité : Ce courriel contient des informations confidentielles destinées uniquement au destinataire. Toute utilisation non autorisée est interdite. Si vous l'avez reçu par erreur, veuillez le détruire et en informer l'expéditeur immédiatement.",
   companyWebsite: "https://explorance.com",
-  companyLogoUrl: "figma:asset/0819ad60d17469a4fa67185ad25cfbfa6e6fc986.png",
+  companyLogoUrl: "https://i.imgur.com/CYvKLQE.png",
   fields: {
     fullName: { visible: true, required: true, label: "Full Name" },
     jobTitle: { visible: true, required: true, label: "Job Title" },
