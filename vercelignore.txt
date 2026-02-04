@@ -1,0 +1,18 @@
+# INSTRUCTIONS: Renommer ce fichier en ".vercelignore" (avec le point au début)
+# Ou copier le contenu ci-dessous dans un nouveau fichier .vercelignore
+
+# Exclude Supabase completely from Vercel deployment
+supabase/
+supabase/**/*
+utils/supabase/
+utils/supabase/**/*
+
+# Exclude all documentation files
+*.md
+!README.md
+
+# Exclude development files
+.vscode/
+.idea/
+*.log
+node_modules/

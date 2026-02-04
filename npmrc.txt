@@ -1,0 +1,10 @@
+# INSTRUCTIONS: Renommer ce fichier en ".npmrc" (avec le point au début)
+# Ou copier le contenu ci-dessous dans un nouveau fichier .npmrc
+
+# NPM Configuration
+registry=https://registry.npmjs.org/
+auto-install-peers=true
+strict-peer-dependencies=false
+
+# No Supabase
+supabase-disabled=true

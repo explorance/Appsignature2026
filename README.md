@@ -2,11 +2,39 @@
 
 A professional email signature generator for Explorance, built with React, TypeScript, and Tailwind CSS.
 
+---
+
+## 🚨 ERREUR 403 SUPABASE ? 
+
+**SOLUTION IMMÉDIATE (2 minutes):**
+
+```bash
+git add .
+git commit -m "fix: Remove Supabase - eliminate 403 error"
+git push origin main
+```
+
+**Guides disponibles:**
+- **[⚡ START_HERE_NOW.md](./START_HERE_NOW.md)** - Solution en 2 minutes (COMMENCEZ ICI)
+- **[🚨 LISEZ_MOI_URGENT.md](./LISEZ_MOI_URGENT.md)** - Fix rapide en 30 secondes
+- **[📊 VISUAL_FIX_403.md](./VISUAL_FIX_403.md)** - Vue d'ensemble visuelle
+- **[📖 DEPLOIEMENT_SANS_ERREUR_403.md](./DEPLOIEMENT_SANS_ERREUR_403.md)** - Guide complet détaillé
+- **[🔧 SUPABASE_COMPLETELY_REMOVED.md](./SUPABASE_COMPLETELY_REMOVED.md)** - Documentation technique
+
+---
+
 > **🚀 DEPLOYMENT:** Optimized for Vercel with GitHub integration - automatic deployments on every push!
 > 
 > **✅ ARCHITECTURE:** 100% frontend-only, localStorage persistence, zero backend dependencies
 >
 > **⚡ QUICK START:** [Vercel Deployment Guide](./VERCEL_DEPLOYMENT.md) | [GitHub Workflow](./GITHUB_VERCEL_WORKFLOW.md)
+
+## 🚨 Problème de Déploiement?
+
+**Erreur 403 lors du déploiement Vercel?**
+- **[📖 SOLUTION RAPIDE](./LISEZ_MOI_URGENT.md)** - Fix en 30 secondes
+- **[📖 GUIDE COMPLET](./DEPLOIEMENT_SANS_ERREUR_403.md)** - Solution détaillée avec explications
+- **[📖 DOCUMENTATION TECHNIQUE](./SUPABASE_COMPLETELY_REMOVED.md)** - Détails complets de la solution
 
 ## 🎯 Quick Links
 
