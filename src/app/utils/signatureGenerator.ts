@@ -4,7 +4,8 @@ export function generateSignatureHTML(
   data: SignatureData,
   office: Office | undefined,
   banner: Banner | undefined,
-  settings: AdminSettings
+  settings: AdminSettings,
+  isRetina: boolean = false
 ): string {
   const { fullName, jobTitle, cellPhone, companyWebsite, email, linkedin } = data;
 
@@ -39,13 +40,19 @@ export function generateSignatureHTML(
       </tr>`;
   }
 
-  // Company Logo - max-width 100px, auto height, maintains aspect ratio
+  // Company Logo - width 155px, auto height, maintains aspect ratio
+  // For Retina displays (Mac), use 2x size image displayed at 1x for crisp rendering
   if (settings.companyLogoUrl) {
+    const logoWidth = isRetina ? 310 : 155;
+    const logoStyle = isRetina 
+      ? "width: 155px; max-width: 155px; height: auto; display: block; border: 0;" 
+      : "max-width: 155px; height: auto; display: block; border: 0;";
+    
     html += `
       <tr>
         <td style="padding: 0 0 8px 0;">
           <a href="https://www.explorance.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; border: 0;">
-            <img src="${escapeHtml(settings.companyLogoUrl)}" alt="Company Logo" width="100" style="max-width: 100px; height: auto; display: block; border: 0;" />
+            <img src="${escapeHtml(settings.companyLogoUrl)}" alt="Company Logo" width="${logoWidth}" style="${logoStyle}" />
           </a>
         </td>
       </tr>`;
@@ -108,8 +115,14 @@ export function generateSignatureHTML(
   }
 
   // Banner (if selected) - with optional clickable link, max-width 400px, auto height, maintains aspect ratio
+  // For Retina displays (Mac), use 2x size image displayed at 1x for crisp rendering
   if (banner && banner.imageUrl) {
-    const bannerImg = `<img src="${escapeHtml(banner.imageUrl)}" alt="${escapeHtml(banner.name)}" width="400" style="max-width: 400px; height: auto; display: block; border: 0; border-radius: 4px;" />`;
+    const bannerWidth = isRetina ? 800 : 400;
+    const bannerStyle = isRetina
+      ? "width: 400px; max-width: 400px; height: auto; display: block; border: 0; border-radius: 4px;"
+      : "max-width: 400px; height: auto; display: block; border: 0; border-radius: 4px;";
+    
+    const bannerImg = `<img src="${escapeHtml(banner.imageUrl)}" alt="${escapeHtml(banner.name)}" width="${bannerWidth}" style="${bannerStyle}" />`;
     
     html += `
       <tr>

@@ -23,6 +23,9 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
   });
 
   const [copied, setCopied] = useState(false);
+  
+  // Detect if user is on Mac (needs Retina images for better quality)
+  const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 
   useEffect(() => {
     setFormData((prev) => ({
@@ -36,7 +39,7 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
   const selectedBanner = selectedCategory?.banners.find((b) => b.id === formData.selectedBannerId);
 
   const handleCopySignature = async () => {
-    const html = generateSignatureHTML(formData, selectedOffice, selectedBanner, settings);
+    const html = generateSignatureHTML(formData, selectedOffice, selectedBanner, settings, isMac);
     
     try {
       // Parse the HTML to extract just the table content
@@ -146,7 +149,7 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
   };
 
   const handleDownloadHTML = () => {
-    const html = generateSignatureHTML(formData, selectedOffice, selectedBanner, settings);
+    const html = generateSignatureHTML(formData, selectedOffice, selectedBanner, settings, isMac);
     const blob = new Blob([html], { type: "text/html" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -435,7 +438,7 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                     <img 
                       src="https://stmarketingwebprod01.blob.core.windows.net/web/assets/Logo_explorance_c02516dbd2.png" 
                       alt="Company Logo" 
-                      style={{ maxWidth: "100px", height: "auto", display: "block", border: "0" }}
+                      style={{ maxWidth: "155px", height: "auto", display: "block", border: "0" }}
                     />
                   </a>
                 </div>
