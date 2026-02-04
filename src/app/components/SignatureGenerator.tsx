@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Copy, Download, CheckCircle2 } from "lucide-react";
-import { generateSignatureHTML } from "../utils/signatureGenerator";
 import type { AdminSettings, SignatureData } from "../types";
+import { generateSignatureHTML } from "../utils/signatureGenerator";
 import CustomSelect from "./CustomSelect";
 
 interface SignatureGeneratorProps {
