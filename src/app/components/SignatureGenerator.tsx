@@ -511,14 +511,14 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                         <img 
                           src={selectedBanner.imageUrl} 
                           alt={selectedBanner.name}
-                          style={{ maxWidth: "400px", height: "auto", display: "block", border: "0", borderRadius: "4px" }}
+                          style={{ maxWidth: "650px", height: "auto", display: "block", border: "0", borderRadius: "4px" }}
                         />
                       </a>
                     ) : (
                       <img 
                         src={selectedBanner.imageUrl} 
                         alt={selectedBanner.name}
-                        style={{ maxWidth: "400px", height: "auto", display: "block", border: "0", borderRadius: "4px" }}
+                        style={{ maxWidth: "650px", height: "auto", display: "block", border: "0", borderRadius: "4px" }}
                       />
                     )}
                   </div>
