@@ -115,7 +115,7 @@ export function generateSignatureHTML(
     
     html += `
       <tr>
-        <td style="padding: 16px 0 0 0;">`;
+        <td style="padding: 16px 0 16px 0;">`;
     
     // Wrap in link if banner has a URL
     if (banner.link) {
@@ -160,7 +160,7 @@ export function generateSignatureHTML(
           <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
             <tbody>
               <tr>
-                <td style="padding: 16px 0 0 0; font-family: Arial, sans-serif; font-size: 11px; line-height: 16.5px; color: #666666;">
+                <td style="padding: 16px 0 16px 0; font-family: Arial, sans-serif; font-size: 11px; line-height: 16.5px; color: #666666;">
                   ${disclaimerHtml}
                 </td>
               </tr>
