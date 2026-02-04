@@ -108,10 +108,10 @@ export function generateSignatureHTML(
       </tr>`;
   }
 
-  // Banner (if selected) - with optional clickable link, width 650px, auto height, maintains aspect ratio
+  // Banner (if selected) - with optional clickable link, width 550px, auto height, maintains aspect ratio
   // Use HTML width attribute for best Outlook compatibility
   if (banner && banner.imageUrl) {
-    const bannerImg = `<img src="${escapeHtml(banner.imageUrl)}" alt="${escapeHtml(banner.name)}" width="650" style="max-width: 650px; height: auto; display: block; border: 0; border-radius: 4px;" />`;
+    const bannerImg = `<img src="${escapeHtml(banner.imageUrl)}" alt="${escapeHtml(banner.name)}" width="550" style="max-width: 550px; height: auto; display: block; border: 0; border-radius: 4px;" />`;
     
     html += `
       <tr>

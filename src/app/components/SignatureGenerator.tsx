@@ -409,9 +409,9 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
           <h2 className="mb-6 text-gray-900">Preview</h2>
 
           {/* Signature Preview */}
-          <div className="mb-6 p-6 bg-gray-50 rounded-lg border border-gray-200 min-h-[300px]">
+          <div className="mb-6 p-6 bg-gray-50 rounded-lg border border-gray-200 min-h-[300px] overflow-auto">
             {formData.fullName ? (
-              <div>
+              <div style={{ maxWidth: "600px" }}>
                 {/* Name */}
                 <div style={{ fontFamily: "Arial, sans-serif", fontSize: "15px", lineHeight: "22.5px", fontWeight: "bold", color: "#000000", marginBottom: "4px" }}>
                   {formData.fullName}
@@ -435,7 +435,7 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                     <img 
                       src={settings.companyLogoUrl}
                       alt="Company Logo" 
-                      style={{ maxWidth: "155px", height: "auto", display: "block", border: "0" }}
+                      style={{ width: "155px", maxWidth: "100%", height: "auto", display: "block", border: "0" }}
                     />
                   </a>
                 </div>
@@ -511,14 +511,14 @@ export default function SignatureGenerator({ settings }: SignatureGeneratorProps
                         <img 
                           src={selectedBanner.imageUrl} 
                           alt={selectedBanner.name}
-                          style={{ maxWidth: "650px", height: "auto", display: "block", border: "0", borderRadius: "4px" }}
+                          style={{ width: "550px", maxWidth: "100%", height: "auto", display: "block", border: "0", borderRadius: "4px" }}
                         />
                       </a>
                     ) : (
                       <img 
                         src={selectedBanner.imageUrl} 
                         alt={selectedBanner.name}
-                        style={{ maxWidth: "650px", height: "auto", display: "block", border: "0", borderRadius: "4px" }}
+                        style={{ width: "550px", maxWidth: "100%", height: "auto", display: "block", border: "0", borderRadius: "4px" }}
                       />
                     )}
                   </div>
