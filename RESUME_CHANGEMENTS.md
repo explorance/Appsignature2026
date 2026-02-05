@@ -7,15 +7,18 @@
 
 ## 🎯 CE QUI A CHANGÉ
 
-### 1. 🔐 Nouveau Mot de Passe Admin
+### 1. 🔐 Deux Mots de Passe Séparés
 
-**Avant:** `eXplorance`  
-**Maintenant:** `Design2026` ✅
+**Structure de sécurité à deux niveaux:**
 
-**Où utiliser:**
-- Page de connexion principale
-- Panneau d'administration
-- Sauvegarde des paramètres
+| Niveau | Mot de Passe | Utilisation |
+|--------|--------------|-------------|
+| **Utilisateur** | `eXplorance` | Page de connexion principale |
+| **Admin** | `Design2026` | Panneau d'administration |
+
+**Comment ça fonctionne:**
+1. Entrez `eXplorance` pour accéder à l'application
+2. Ensuite, entrez `Design2026` pour accéder à l'admin (si nécessaire)
 
 ---
 
@@ -40,13 +43,16 @@
 # 1. Démarrer
 npm run dev
 
-# 2. Connexion
-Mot de passe: Design2026
+# 2. Connexion Utilisateur
+Mot de passe: eXplorance
 
-# 3. Générer une signature
+# 3. (Optionnel) Connexion Admin
+Onglet "Admin" → Mot de passe: Design2026
+
+# 4. Générer une signature
 Remplir les champs + Copier
 
-# 4. Tester
+# 5. Tester
 Coller dans Gmail/Outlook
 Basculer entre Light et Dark mode
 ```
@@ -59,6 +65,7 @@ Basculer entre Light et Dark mode
 
 | Document | Description | Temps de lecture |
 |----------|-------------|------------------|
+| `MOTS_DE_PASSE.md` | Guide complet des mots de passe | 10 min |
 | `DARK_MODE_PASSWORD_UPDATE.md` | Détails techniques complets | 10-15 min |
 | `QUICK_TEST_GUIDE.md` | Guide de test rapide | 5 min |
 | `RESUME_CHANGEMENTS.md` | Ce fichier (résumé) | 2 min |
@@ -135,7 +142,7 @@ Disclaimer: #cccccc (gris clair)
 → Effacer le cache et régénérer la signature
 
 ### Mot de passe refusé
-→ Utiliser `Design2026` (pas `eXplorance`)
+→ Utilisateur: `eXplorance` / Admin: `Design2026`
 
 ### Les couleurs ne changent pas
 → Client email trop ancien (c'est normal)
@@ -151,6 +158,7 @@ Disclaimer: #cccccc (gris clair)
 ---
 
 **Version:** 2.3  
-**Mot de passe:** `Design2026` ✅  
+**Mot de passe Utilisateur:** `eXplorance` ✅  
+**Mot de passe Admin:** `Design2026` ✅  
 **Dark Mode:** Activé ✅  
-**Prêt:** OUI ✅  
+**Prêt:** OUI ✅

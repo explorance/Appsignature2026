@@ -5,7 +5,7 @@ interface PasswordProtectionProps {
   children: React.ReactNode;
 }
 
-const CORRECT_PASSWORD = "Design2026";
+const CORRECT_PASSWORD = "eXplorance";
 const STORAGE_KEY = "app_authenticated";
 
 export default function PasswordProtection({ children }: PasswordProtectionProps) {
