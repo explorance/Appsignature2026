@@ -10,30 +10,51 @@ export function generateSignatureHTML(
 
   // Build the signature HTML with table-based structure for maximum Outlook compatibility
   // Tables ensure consistent spacing across all email clients (Outlook Windows/Mac, Gmail, etc.)
+  // Dark mode support: Use color-scheme and data-ogsc attributes for Outlook compatibility
   let html = `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <style>
+    /* Dark mode support for modern email clients */
+    @media (prefers-color-scheme: dark) {
+      .dark-mode-text { color: #ffffff !important; }
+      .dark-mode-link { color: #6bb6ff !important; }
+      .dark-mode-disclaimer { color: #cccccc !important; }
+      .dark-mode-border { border-color: #444444 !important; }
+    }
+    /* Light mode - default colors */
+    @media (prefers-color-scheme: light) {
+      .dark-mode-text { color: #000000 !important; }
+      .dark-mode-link { color: #0077b5 !important; }
+      .dark-mode-disclaimer { color: #666666 !important; }
+      .dark-mode-border { border-color: #e0e0e0 !important; }
+    }
+  </style>
 </head>
 <body style="margin: 0; padding: 0; background-color: transparent;">
   <table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, sans-serif; max-width: 600px; border-collapse: collapse; background-color: transparent; border: 0;">
     <tbody>`;
 
   // Name - Arial Bold 15px, line-height 22.5px
+  // Dark mode: Uses class for automatic color adaptation
   if (fullName) {
     html += `
       <tr>
-        <td style="padding: 0 0 4px 0; font-family: Arial, sans-serif; font-size: 15px; line-height: 22.5px; font-weight: bold; color: #000000;">
+        <td class="dark-mode-text" style="padding: 0 0 4px 0; font-family: Arial, sans-serif; font-size: 15px; line-height: 22.5px; font-weight: bold; color: #000000;" data-ogsc="#000000" data-ogsb="">
           ${escapeHtml(fullName)}
         </td>
       </tr>`;
   }
 
   // Job Title - Arial Regular 14px, line-height 21px
+  // Dark mode: Uses class for automatic color adaptation
   if (jobTitle) {
     html += `
       <tr>
-        <td style="padding: 0 0 8px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 21px; color: #000000;">
+        <td class="dark-mode-text" style="padding: 0 0 8px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 21px; color: #000000;" data-ogsc="#000000" data-ogsb="">
           ${escapeHtml(jobTitle)}
         </td>
       </tr>`;
@@ -53,15 +74,17 @@ export function generateSignatureHTML(
   }
 
   // Office Address - Arial Regular 13px, line-height 19.5px
+  // Dark mode: Uses class for automatic color adaptation
   if (office) {
     html += `
       <tr>
-        <td style="padding: 0; font-family: Arial, sans-serif; font-size: 13px; line-height: 19.5px; color: #000000;">
+        <td class="dark-mode-text" style="padding: 0; font-family: Arial, sans-serif; font-size: 13px; line-height: 19.5px; color: #000000;" data-ogsc="#000000" data-ogsb="">
           ${escapeHtml(office.address)}
         </td>
       </tr>`;
 
     // Phone numbers - Arial Regular 13px, line-height 19.5px
+    // Dark mode: Uses class for automatic color adaptation
     if (office.phone || cellPhone) {
       let phoneText = "";
       if (office.phone) {
@@ -74,7 +97,7 @@ export function generateSignatureHTML(
 
       html += `
       <tr>
-        <td style="padding: 0; font-family: Arial, sans-serif; font-size: 13px; line-height: 19.5px; color: #000000;">
+        <td class="dark-mode-text" style="padding: 0; font-family: Arial, sans-serif; font-size: 13px; line-height: 19.5px; color: #000000;" data-ogsc="#000000" data-ogsb="">
           ${phoneText}
         </td>
       </tr>`;
@@ -82,22 +105,23 @@ export function generateSignatureHTML(
   }
 
   // Email / Website / LinkedIn on same line - Arial Regular 13px, underlined, color #0077b5
+  // Dark mode: Links use dark-mode-link class for automatic color adaptation
   if (email || companyWebsite || linkedin) {
     let linkText = "";
     
     if (email) {
-      linkText += `<a href="mailto:${escapeHtml(email)}" style="color: #0077b5; text-decoration: underline; font-family: Arial, sans-serif; font-size: 13px;">${escapeHtml(email)}</a>`;
+      linkText += `<a href="mailto:${escapeHtml(email)}" class="dark-mode-link" style="color: #0077b5; text-decoration: underline; font-family: Arial, sans-serif; font-size: 13px;" data-ogsc="#0077b5">${escapeHtml(email)}</a>`;
     }
     
     if (companyWebsite) {
       if (linkText) linkText += " | ";
       const displayUrl = companyWebsite.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
-      linkText += `<a href="${escapeHtml(companyWebsite)}" style="color: #0077b5; text-decoration: underline; font-family: Arial, sans-serif; font-size: 13px;">${escapeHtml(displayUrl)}</a>`;
+      linkText += `<a href="${escapeHtml(companyWebsite)}" class="dark-mode-link" style="color: #0077b5; text-decoration: underline; font-family: Arial, sans-serif; font-size: 13px;" data-ogsc="#0077b5">${escapeHtml(displayUrl)}</a>`;
     }
     
     if (linkedin) {
       if (linkText) linkText += " | ";
-      linkText += `<a href="${escapeHtml(linkedin)}" style="color: #0077b5; text-decoration: underline; font-family: Arial, sans-serif; font-size: 13px;">LinkedIn</a>`;
+      linkText += `<a href="${escapeHtml(linkedin)}" class="dark-mode-link" style="color: #0077b5; text-decoration: underline; font-family: Arial, sans-serif; font-size: 13px;" data-ogsc="#0077b5">LinkedIn</a>`;
     }
 
     html += `
@@ -134,6 +158,7 @@ export function generateSignatureHTML(
   }
 
   // Disclaimer - Arial Regular 11px, line-height 16.5px, color #666, border-top #e0e0e0
+  // Dark mode: Uses classes for automatic color adaptation
   if (settings.disclaimerEnglish || settings.disclaimerFrench) {
     let disclaimerText = "";
     
@@ -156,11 +181,11 @@ export function generateSignatureHTML(
       
       html += `
       <tr>
-        <td style="padding: 16px 0 0 0; border-top: 1px solid #e0e0e0;">
+        <td class="dark-mode-border" style="padding: 16px 0 0 0; border-top: 1px solid #e0e0e0;">
           <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
             <tbody>
               <tr>
-                <td style="padding: 16px 0 16px 0; font-family: Arial, sans-serif; font-size: 11px; line-height: 16.5px; color: #666666;">
+                <td class="dark-mode-disclaimer" style="padding: 16px 0 16px 0; font-family: Arial, sans-serif; font-size: 11px; line-height: 16.5px; color: #666666;" data-ogsc="#666666" data-ogsb="">
                   ${disclaimerHtml}
                 </td>
               </tr>

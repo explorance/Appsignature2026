@@ -137,7 +137,7 @@ export default function App() {
   }, []);
 
   const handleUpdateSettings = async (newSettings: AdminSettings, password: string) => {
-    if (password !== "eXplorance") {
+    if (password !== "Design2026") {
       return { success: false, error: "Invalid password" };
     }
     

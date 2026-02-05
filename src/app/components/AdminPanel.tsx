@@ -5,11 +5,11 @@ import Dialog from "./Dialog";
 
 interface AdminPanelProps {
   settings: AdminSettings;
-  onUpdate: (settings: AdminSettings, password: string) => Promise<{ success: boolean; error?: string }>;
+  onUpdate: (newSettings: AdminSettings, password: string) => Promise<{ success: boolean; error?: string }>;
   defaultSettings: AdminSettings;
 }
 
-const ADMIN_PASSWORD = "eXplorance";
+const ADMIN_PASSWORD = "Design2026";
 
 export default function AdminPanel({ settings, onUpdate, defaultSettings }: AdminPanelProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
