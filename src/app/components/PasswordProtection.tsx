@@ -101,7 +101,7 @@ export default function PasswordProtection({ children }: PasswordProtectionProps
 
           <div className="mt-6 pt-6 border-t border-gray-200">
             <p className="text-xs text-gray-500 text-center">
-              For eXplorance employees only. If you don't have access, please contact your IT administrator.
+              For explorance employees only. If you don't have access, please contact your IT administrator.
             </p>
           </div>
         </div>
