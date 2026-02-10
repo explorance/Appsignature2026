@@ -53,7 +53,12 @@ export default function PasswordProtection({ children }: PasswordProtectionProps
               <Lock className="size-8 text-blue-600" />
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-2">
-              eXplorance Email Signature
+              <img 
+                src="https://fdendpoint-marketing-explorance-prod-01-ebh8gbhmaudgf5gd.a03.azurefd.net/web/assets/Logo_explorance_x4_944ab67640.png" 
+                alt="explorance" 
+                className="h-auto mx-auto"
+                style={{ width: '155px' }}
+              />
             </h1>
             <p className="text-gray-600 text-center">
               This application is protected. Please enter the password to continue.
